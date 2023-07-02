@@ -1,0 +1,23 @@
+@import url(styles/layout.css);
+@import url(styles/typography.css);
+@import url(styles/animations.css);
+
+@import 'styles/variables';
+
+/* General Styling */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  // reset defaults
+  margin: 0;
+  padding: 0px;
+  cursor: default;
+  // layout
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 10vh 10vh 40vh 30vh;
+  row-gap: 2vh;
+}
