@@ -1,18 +1,59 @@
 @import 'variables';
 
-header {
+%flex-object--centered {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  border-bottom: 2px solid #222020;
-  // background-color: $color;
+}
 
-    div {
-      padding: 5px;
-      background-image: linear-gradient(45deg, #333030, #70a6ca);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+body {
+  display: grid;
+  grid-template-rows: minmax(80px, 10vh) 50px minmax(650px, 75vh);
+}
+
+header {
+  @extend %flex-object--centered;
+  border-bottom: 2px solid #222020;
+  margin-bottom: 20px;
+}
+
+.animation-container {
+  @extend %flex-object--centered;
+}
+
+.game-container {
+  @extend %flex-object--centered;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#game-board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  row-gap: 1.5%;
+  width: 300px;
+  height: 360px;
+  .game-board__row {
+    @extend %flex-object--centered;
+    justify-content: space-between;
+    .game-board__letter {
+      width: 18.5%;
+      height: 100%;
     }
+  }
+}
+
+#keyboard {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  row-gap: 15px;
+  .keyboard__row {
+    display: flex;
+    column-gap: 5px;
+    .keyboard__letter {
+      padding-block: 2vw;
+      padding-inline: 1.5vw;
+    }
+  }
 }
