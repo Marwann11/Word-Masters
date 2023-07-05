@@ -1,0 +1,58 @@
+#game-board .game-board__row, .game-container, .animation-container, header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  display: grid;
+  grid-template-rows: minmax(80px, 10vh) 50px minmax(650px, 75vh);
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+.game-container {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#game-board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  row-gap: 1.5%;
+  width: 300px;
+  height: 360px;
+}
+@media (max-width: 300px) {
+  #game-board {
+    width: 95vw;
+    height: 114vw;
+  }
+}
+#game-board .game-board__row {
+  justify-content: space-between;
+}
+#game-board .game-board__row .game-board__letter {
+  background-color: #222020;
+  width: 18.5%;
+  height: 100%;
+}
+
+#keyboard {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  row-gap: 15px;
+}
+#keyboard .keyboard__row {
+  display: flex;
+  column-gap: 5px;
+}
+#keyboard .keyboard__row .keyboard__letter {
+  padding-block: clamp(5px, 2vw, 30px);
+  padding-inline: clamp(3.75px, 1.5vw, 22.5px);
+}
+
+/*# sourceMappingURL=layout.css.map */

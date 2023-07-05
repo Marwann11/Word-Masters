@@ -1,0 +1,13 @@
+@import url(styles/layout.css);
+/* General Styling */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0px;
+  cursor: default;
+}
+
+/*# sourceMappingURL=main.css.map */
