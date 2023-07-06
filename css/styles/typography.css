@@ -1,14 +1,9 @@
-@import 'variables';
-
-//* fonts
 @font-face {
   font-family: "martian-mono";
   src: url(fonts/martian-mono/MartianMono-VariableFont_wdth\,wght.ttf) format("truetype");
 }
-// *****
-
 body {
-  font-family: "martian-mono", $fallback-fonts;
+  font-family: "martian-mono", "Inconsolata", "Ubuntu Mono", "Roboto Mono", monospace;
 }
 
 header {
@@ -17,14 +12,13 @@ header {
   font-variation-settings: "wdth" 87.5;
   border-bottom: 5px solid transparent;
   border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
-  div {
-    background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
 }
-
+header div {
+  background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
 .game-board__letter {
   font-weight: 600;
@@ -32,5 +26,7 @@ header {
 }
 
 .keyboard__letter {
-  font: 200 clamp(1rem, 2vw, 1.5rem) "martian-mono", $fallback-fonts;
+  font: 200 clamp(1rem, 2vw, 1.5rem) "martian-mono", "Inconsolata", "Ubuntu Mono", "Roboto Mono", monospace;
 }
+
+/*# sourceMappingURL=typography.css.map */
