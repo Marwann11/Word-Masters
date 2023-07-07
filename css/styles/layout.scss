@@ -1,8 +1,4 @@
-%flex-object--centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import 'variables';
 
 body {
   display: grid;
@@ -41,6 +37,7 @@ header {
     @extend %flex-object--centered;
     justify-content: space-between;
     .game-board__letter {
+      @extend %flex-object--centered;
       width: 18.5%;
       height: 100%;
     }
@@ -51,13 +48,14 @@ header {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  row-gap: 15px;
+  row-gap: 10px;
+  margin-inline: 10px;
   .keyboard__row {
     display: flex;
     column-gap: 5px;
     .keyboard__letter {
-      padding-block: clamp(5px, 2vw, 12px);
-      padding-inline: clamp(3.75px, 1.5vw, 9px);
+      padding-block: clamp(4.4px, 2.75vw, 16px);
+      padding-inline: clamp(4px, 2.5vw, 14.4px);
     }
   }
 }

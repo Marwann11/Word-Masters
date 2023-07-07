@@ -1,0 +1,143 @@
+.keyboard__letter--dark-correct, .keyboard__letter--dark, .keyboard__letter--correct, .keyboard__letter--close, .keyboard__letter--missing, .keyboard__letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header--dark, header {
+  border-bottom: 5px solid transparent;
+}
+
+.header--dark .header__div--dark, header div {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.game-board__letter--correct, .game-board__letter--close, .game-board__letter--missing, .game-board__letter {
+  border: 2px solid #a9a9a9;
+  border-radius: 5px;
+}
+
+.game-board__letter--dark-correct, .game-board__letter--dark-close, .game-board__letter--dark-missing, .game-board__letter--dark {
+  border: 2px solid #777777;
+  border-radius: 5px;
+}
+
+.keyboard__letter--dark-correct, .keyboard__letter--dark, .keyboard__letter--correct, .keyboard__letter--close, .keyboard__letter--missing, .keyboard__letter {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+header {
+  border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+}
+header div {
+  background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
+}
+
+.header--dark {
+  border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
+}
+.header--dark .header__div--dark {
+  background-image: linear-gradient(120deg, #8ecafc, #46a4f7);
+}
+
+.game-board__letter {
+  background-color: #fff;
+  color: #212121;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--missing {
+  background-color: #505050;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--close {
+  background-color: #b6b23c;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--correct {
+  background-color: #5d9b55;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--dark {
+  background-color: #212121;
+  color: #fff;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--dark-missing {
+  background-color: #525252;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--dark-close {
+  background-color: #b49c30;
+  color: #fff;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--dark-correct {
+  background-color: #5d9b55;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter {
+  background-color: #e2e2e2;
+  color: #000;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--missing {
+  background-color: #505050;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--close {
+  background-color: #b6b23c;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--correct {
+  background-color: #5d9b55;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--dark {
+  background-color: #d4d4d4;
+  color: #000;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--dark-missing {
+  background-color: #525252;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--dark-close {
+  background-color: #b49c30;
+  color: #fff;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.keyboard__letter--dark-correct {
+  background-color: #5d9b55;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+/*# sourceMappingURL=design.css.map */
