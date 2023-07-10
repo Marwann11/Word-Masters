@@ -16,12 +16,12 @@
 
 .game-board__letter--correct, .game-board__letter--close, .game-board__letter--missing, .game-board__letter {
   border: 2px solid #a9a9a9;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .game-board__letter--dark-correct, .game-board__letter--dark-close, .game-board__letter--dark-missing, .game-board__letter--dark {
   border: 2px solid #777777;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .keyboard__letter--dark-correct, .keyboard__letter--dark, .keyboard__letter--correct, .keyboard__letter--close, .keyboard__letter--missing, .keyboard__letter {
@@ -45,8 +45,8 @@ header div {
 }
 
 .game-board__letter {
-  background-color: #fff;
-  color: #212121;
+  background-color: #212121;
+  color: #fff;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 

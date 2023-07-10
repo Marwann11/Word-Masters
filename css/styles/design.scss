@@ -14,12 +14,12 @@
 //* letters components
 %letters--light-border {
   border: 2px solid #a9a9a9;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 %letters--dark-border {
   border: 2px solid #777777;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 %keyboard-letter--properties {
@@ -57,7 +57,8 @@ header {
 //* game-board
 //** light-theme
 .game-board__letter {
-  @include letters--theme($bkg: #fff, $color: #212121, $box-shadow: $box-shadow--light);
+  // TODO: To be changed after testing
+  @include letters--theme($bkg: #212121, $color: #fff, $box-shadow: $box-shadow--light);
   @extend %letters--light-border;
 }
 

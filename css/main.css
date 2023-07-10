@@ -1,6 +1,7 @@
 @import url(styles/layout.css);
 @import url(styles/typography.css);
 @import url(styles/design.css);
+@import url(styles/animations.css);
 /* General Styling */
 * {
   box-sizing: border-box;
