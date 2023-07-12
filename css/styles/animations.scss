@@ -1,6 +1,8 @@
 @import 'variables';
 
-// game-board cells writing animation
+//* Game-board Animations
+
+// game-board cells typing animation
 @keyframes pop-box {
   0% {
     scale: 1;
@@ -13,24 +15,76 @@
   }
 }
 
-// keyboard buttons writing animation
+@keyframes swipe-right {
+  0% {
+    text-indent: -500%;
+  }
+  100% {
+    text-indent: 0;
+  }
+}
+
+@keyframes swipe-left {
+  0% {
+    text-indent: 0;
+  }
+  100% {
+    text-indent: -500%;
+  }
+}
+
+
+.game-board__letter {
+  overflow: hidden;
+}
+
+//* Keyboard Animations
+
+// keyboard click typing animation
 @keyframes push-button {
   50% {
     opacity: 0.75;
     scale: 0.75;
     translate: 0 5px;
   }
-  100% {
-    opacity: 1;
-    scale: 1.05;
-    translate: none;
-  }
 }
 
-// for mobile devices wih touch pointers
+// keyboard (writing on keyboard) typing animation
+.keyboard__letter:not(.keyboard__letter[aria-label="Backspace"]):not(.keyboard__letter[aria-label="Enter"]) {
+  transition: opacity, scale, translate 0.1s ease-out;
+}
+
+.keyboard__letter[aria-label="Backspace"],
+.keyboard__letter[aria-label="Enter"] {
+  transition: opacity, background-color, scale, translate 0.1s ease-out;
+}
+
+
+//* media queries
+
+// for mobile devices with touch pointers
 @media (hover: none) and (pointer: coarse) {
-  .keyboard__letter:active {
+  .keyboard__letter:active:not(.keyboard__letter[aria-label="Backspace"]):not(.keyboard__letter[aria-label="Enter"]) {
     animation: push-button 0.1s ease-out;
+  }
+
+  .keyboard__letter[aria-label="Backspace"],
+  .keyboard__letter[aria-label="Enter"] {
+    transition: background-color, scale, translate 0.2s ease-out;
+  }
+
+  .keyboard__letter[aria-label="Backspace"]:active {
+    opacity: 0.85;
+    scale: 0.9;
+    translate: 0 2px;
+    background-color: #B22222;
+  }
+
+  .keyboard__letter[aria-label="Enter"]:active {
+    opacity: 0.85;
+    scale: 0.9;
+    translate: 0 2px;
+    background-color: #5d9b55;
   }
 }
 
@@ -40,8 +94,23 @@
     opacity: 0.85;
     transform: scale(1.03) translateY(-3px);
   }
-  .keyboard__letter:active {
+
+  .keyboard__letter:active:not(.keyboard__letter[aria-label="Backspace"]):not(.keyboard__letter[aria-label="Enter"]) {
     animation: push-button 0.1s ease-out;
+  }
+
+  .keyboard__letter[aria-label="Backspace"]:active {
+    opacity: 0.85;
+    scale: 0.9;
+    translate: 0 2px;
+    background-color: #B22222;
+  }
+
+  .keyboard__letter[aria-label="Enter"]:active {
+    opacity: 0.85;
+    scale: 0.9;
+    translate: 0 2px;
+    background-color: #5d9b55;
   }
 }
 

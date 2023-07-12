@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Masters</title>
     <link rel="stylesheet" href="css/main.css">
-    <script defer src="js/wordle.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <!--* Support for older browsers  *-->
+    <script type="nomodule" src="js/main.js"></script>
+    <!--******-->
   </head>
   <body style="background-color: #212121;">
     <header>
@@ -90,7 +93,7 @@
           <button class="keyboard__letter" aria-label="B">B</button>
           <button class="keyboard__letter" aria-label="N">N</button>
           <button class="keyboard__letter" aria-label="M">M</button>
-          <button class="keyboard__letter" aria-label="Backspace"><img src="css/images/svg/backspace-dark_theme.svg" alt="backspace button"></button>
+          <button class="keyboard__letter" aria-label="Backspace"><img src="css/images/svg/backspace.svg" alt="backspace button"></button>
         </div>
       </div>
     </div>
