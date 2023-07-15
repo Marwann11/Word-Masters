@@ -1,5 +1,14 @@
 @import 'variables';
 
+//* General
+body {
+  background-color: #f3f3f3;
+}
+
+.body--dark {
+  background-color: #212121;
+}
+
 //* header components
 %header-border {
   border-bottom: 5px solid transparent;
@@ -11,15 +20,23 @@
   color: transparent;
 }
 
+//* feedback components
+.feedback-message {
+  color: #ad0c0c;
+}
+.feedback-message--dark {
+  color: #f58f8f;
+}
+
 //* letters components
 %letters--light-border {
   border: 2px solid #a9a9a9;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 %letters--dark-border {
   border: 2px solid #777777;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 %keyboard-letter--properties {
@@ -37,49 +54,53 @@
 
 //* header
 header {
-  border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+  @supports (border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1) {
+    border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+  }
+  border-color: #1E88E5; // fallback for older browsers
   @extend %header-border; 
   div {
     background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
+    background-image: -webkit-linear-gradient(120deg, #64B5F6, #1E88E5);
+    background-color: #1E88E5; // fallback for older browsers
     @extend %header-bkg__text;
   }
 }
 
 .header--dark {
-  border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
-  @extend %header-border; 
+  @supports (border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1) {
+    border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
+  }
+  border-color: #46a4f7; // fallback for older browsers
   .header__div--dark {
     background-image: linear-gradient(120deg, #8ecafc, #46a4f7);
-    @extend %header-bkg__text;
+    background-image: -webkit-linear-gradient(120deg, #8ecafc, #46a4f7);
+    background-color: #8ecafc; // fallback for older browsers
   }
 }
 
 //* game-board
 //** light-theme
 .game-board__letter {
-  // TODO: To be changed after testing
-  @include letters--theme($bkg: #212121, $color: #fff, $box-shadow: $box-shadow--light);
+  @include letters--theme(transparent, #000, $box-shadow--light);
   @extend %letters--light-border;
 }
 
 .game-board__letter--missing {
   @include letters--theme(#505050, #f3f3f3, $box-shadow--light);
-  @extend %letters--light-border;
 }
 
 .game-board__letter--close {
   @include letters--theme(#b6b23c, #f3f3f3, $box-shadow--light);
-  @extend %letters--light-border;
 }
 
 .game-board__letter--correct {
   @include letters--theme(#5d9b55, #f3f3f3, $box-shadow--light);
-  @extend %letters--light-border;
 }
 
 //** dark-theme
 .game-board__letter--dark {
-  @include letters--theme(#212121, #fff, $box-shadow--dark);
+  @include letters--theme(transparent, #fff, $box-shadow--dark);
   @extend %letters--dark-border;
 }
 
@@ -100,41 +121,50 @@ header {
 
 //* keyboard
 //** light-theme
+.keyboard {
+  background-image: linear-gradient(to top, #232526, #414345);
+  background-image: -webkit-linear-gradient(to top, #232526, #414345);
+  background-color: #414345; // fallback for old browsers
+  padding: 20px;
+  border-radius: 15px;
+}
+
 .keyboard__letter {
+  @include letters--theme(#f5f5f5, #000, $box-shadow--light);
   @extend %keyboard-letter--properties;
-  @include letters--theme(#e2e2e2, #000, $box-shadow--light);
 }
 
 .keyboard__letter--missing {
-  @extend %keyboard-letter--properties;
   @include letters--theme(#505050, #f3f3f3, $box-shadow--light);
 }
 
 .keyboard__letter--close {
-  @extend %keyboard-letter--properties;
   @include letters--theme(#b6b23c, #f3f3f3, $box-shadow--light);
 }
 
 .keyboard__letter--correct {
-  @extend %keyboard-letter--properties;
   @include letters--theme(#5d9b55, #f3f3f3, $box-shadow--light);
 }
 
 //* dark-theme
+.keyboard--dark {
+  background-image: linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background-image: -webkit-linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background-color: #ADA996;  // fallback for old browsers
+}
+
 .keyboard__letter--dark {
-  @extend %keyboard-letter--properties;
-  @include letters--theme(#d4d4d4, #000, $box-shadow--dark);
+  @include letters--theme(#212121, whitesmoke, $box-shadow--dark);
 }
 
 .keyboard__letter--dark-missing {
-  @include letters--theme(#525252, #f3f3f3, $box-shadow--dark);
+  @include letters--theme(#bdbdbd, #212121, $box-shadow--dark);
 }
 
 .keyboard__letter--dark-close {
-  @include letters--theme(#b49c30, #fff, $box-shadow--dark);
+  @include letters--theme(#b49c30, whitesmoke, $box-shadow--dark);
 }
 
 .keyboard__letter--dark-correct {
-  @extend %keyboard-letter--properties;
-  @include letters--theme(#5d9b55, #f3f3f3, $box-shadow--dark);
+  @include letters--theme(#5d9b55, whitesmoke, $box-shadow--dark);
 }

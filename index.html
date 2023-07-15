@@ -5,62 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Masters</title>
     <link rel="stylesheet" href="css/main.css">
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/main.mjs"></script>
     <!--* Support for older browsers  *-->
-    <script type="nomodule" src="js/main.js"></script>
+    <script type="nomodule" src="js/main.mjs"></script>
     <!--******-->
   </head>
-  <body style="background-color: #212121;">
+  <body>
     <header>
       <div>Word Masters</div>
     </header>
-    <div class="animation-container"><div class="loading-animation"></div></div>
+    <div class="feedback-container">
+      <div class="feedback-message"></div>
+      <div class="feedback-animation"></div>
+    </div>
     <div class="game-container">
-      <div id="game-board">
+      <div class="game-board">
         <div class="game-board__row" data-state="TBD">
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
         </div>
         <div class="game-board__row" data-state="TBD">
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
         </div>
         <div class="game-board__row" data-state="TBD">
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
         </div>
         <div class="game-board__row" data-state="TBD">
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
         </div>
         <div class="game-board__row" data-state="TBD">
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
         </div>
         <div class="game-board__row" data-state="TBD">
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
-          <div class="game-board__letter"></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
+          <div class="game-board__letter"><span class="letter-text"></span></div>
         </div>
       </div>
-      <div id="keyboard">
+      <div class="keyboard">
         <div class="keyboard__row">
           <button class="keyboard__letter" aria-label="Q">Q</button>
           <button class="keyboard__letter" aria-label="W">W</button>
@@ -85,7 +88,7 @@
           <button class="keyboard__letter" aria-label="L">L</button>
         </div>
         <div class="keyboard__row">
-          <button class="keyboard__letter" aria-label="Enter">ENTER</button>
+          <button class="keyboard__letter enter-button" aria-label="Enter">ENTER</button>
           <button class="keyboard__letter" aria-label="Z">Z</button>
           <button class="keyboard__letter" aria-label="X">X</button>
           <button class="keyboard__letter" aria-label="C">C</button>
@@ -93,7 +96,7 @@
           <button class="keyboard__letter" aria-label="B">B</button>
           <button class="keyboard__letter" aria-label="N">N</button>
           <button class="keyboard__letter" aria-label="M">M</button>
-          <button class="keyboard__letter" aria-label="Backspace"><img src="css/images/svg/backspace.svg" alt="backspace button"></button>
+          <button class="keyboard__letter backspace-button" aria-label="Backspace"><img src="css/images/svg/backspace.svg" width="30px" height="30px" alt="backspace button"></button>
         </div>
       </div>
     </div>

@@ -1,52 +1,82 @@
-.keyboard__letter--dark-correct, .keyboard__letter--dark, .keyboard__letter--correct, .keyboard__letter--close, .keyboard__letter--missing, .keyboard__letter {
+.keyboard__letter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.header--dark, header {
+body {
+  background-color: #f3f3f3;
+}
+
+.body--dark {
+  background-color: #212121;
+}
+
+header {
   border-bottom: 5px solid transparent;
 }
 
-.header--dark .header__div--dark, header div {
+header div {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.game-board__letter--correct, .game-board__letter--close, .game-board__letter--missing, .game-board__letter {
+.feedback-message {
+  color: #ad0c0c;
+}
+
+.feedback-message--dark {
+  color: #f58f8f;
+}
+
+.game-board__letter {
   border: 2px solid #a9a9a9;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .game-board__letter--dark-correct, .game-board__letter--dark-close, .game-board__letter--dark-missing, .game-board__letter--dark {
   border: 2px solid #777777;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.keyboard__letter--dark-correct, .keyboard__letter--dark, .keyboard__letter--correct, .keyboard__letter--close, .keyboard__letter--missing, .keyboard__letter {
+.keyboard__letter {
   cursor: pointer;
   border: none;
   border-radius: 5px;
 }
 
 header {
-  border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+  border-color: #1E88E5;
+}
+@supports (border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1) {
+  header {
+    border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+  }
 }
 header div {
   background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
+  background-image: -webkit-linear-gradient(120deg, #64B5F6, #1E88E5);
+  background-color: #1E88E5;
 }
 
 .header--dark {
-  border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
+  border-color: #46a4f7;
+}
+@supports (border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1) {
+  .header--dark {
+    border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
+  }
 }
 .header--dark .header__div--dark {
   background-image: linear-gradient(120deg, #8ecafc, #46a4f7);
+  background-image: -webkit-linear-gradient(120deg, #8ecafc, #46a4f7);
+  background-color: #8ecafc;
 }
 
 .game-board__letter {
-  background-color: #212121;
-  color: #fff;
+  background-color: transparent;
+  color: #000;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -69,7 +99,7 @@ header div {
 }
 
 .game-board__letter--dark {
-  background-color: #212121;
+  background-color: transparent;
   color: #fff;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
@@ -92,8 +122,16 @@ header div {
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
+.keyboard {
+  background-image: linear-gradient(to top, #232526, #414345);
+  background-image: -webkit-linear-gradient(to top, #232526, #414345);
+  background-color: #414345;
+  padding: 20px;
+  border-radius: 15px;
+}
+
 .keyboard__letter {
-  background-color: #e2e2e2;
+  background-color: #f5f5f5;
   color: #000;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -116,27 +154,33 @@ header div {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.keyboard--dark {
+  background-image: linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background-image: -webkit-linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background-color: #ADA996;
+}
+
 .keyboard__letter--dark {
-  background-color: #d4d4d4;
-  color: #000;
+  background-color: #212121;
+  color: whitesmoke;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
 .keyboard__letter--dark-missing {
-  background-color: #525252;
-  color: #f3f3f3;
+  background-color: #bdbdbd;
+  color: #212121;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
 .keyboard__letter--dark-close {
   background-color: #b49c30;
-  color: #fff;
+  color: whitesmoke;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
 .keyboard__letter--dark-correct {
   background-color: #5d9b55;
-  color: #f3f3f3;
+  color: whitesmoke;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 

@@ -17,6 +17,10 @@ header {
   font-variation-settings: "wdth" 87.5;
 }
 
+.feedback-message {
+  font-size: clamp(0.8rem, 0.75vw, 1.5rem);
+  font-weight: 800;
+}
 
 .game-board__letter {
   font-weight: 700;

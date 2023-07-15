@@ -1,4 +1,4 @@
-#game-board .game-board__row .game-board__letter, #game-board .game-board__row, .game-container, .animation-container, header {
+.game-board .game-board__row .game-board__letter, .game-board .game-board__row, .game-container, .feedback-message, .feedback-container, header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,12 +16,21 @@ header div {
   padding: clamp(5px, 2.5vw, 30px);
 }
 
+.feedback-container {
+  transition: display 0.5s ease-out;
+}
+
+.feedback-message {
+  opacity: 0;
+  width: clamp(100px, 80vw, 1500px);
+}
+
 .game-container {
   flex-direction: column;
   justify-content: space-around;
 }
 
-#game-board {
+.game-board {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   row-gap: 1.5%;
@@ -30,31 +39,31 @@ header div {
   margin-inline: 10px;
 }
 @media (max-width: 310px) {
-  #game-board {
+  .game-board {
     width: 95vw;
     height: 114vw;
   }
 }
-#game-board .game-board__row {
+.game-board .game-board__row {
   justify-content: space-between;
 }
-#game-board .game-board__row .game-board__letter {
+.game-board .game-board__row .game-board__letter {
   width: 18.5%;
   height: 100%;
 }
 
-#keyboard {
+.keyboard {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
   row-gap: 10px;
   margin-inline: 10px;
 }
-#keyboard .keyboard__row {
+.keyboard .keyboard__row {
   display: flex;
   column-gap: 5px;
 }
-#keyboard .keyboard__row .keyboard__letter {
+.keyboard .keyboard__row .keyboard__letter {
   padding-block: clamp(4.4px, 2.75vw, 16px);
   padding-inline: clamp(4px, 2.5vw, 14.4px);
 }

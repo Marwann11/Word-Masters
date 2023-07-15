@@ -1,3 +1,20 @@
+@keyframes feedback-message-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in-feedback {
+  animation: feedback-message-animation 1.5s ease-in-out forwards;
+}
+
+.game-board__letter {
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
 @keyframes pop-box {
   0% {
     scale: 1;
@@ -11,59 +28,149 @@
 }
 @keyframes swipe-right {
   0% {
-    text-indent: -500%;
+    transform: translateX(-500%);
   }
   100% {
-    text-indent: 0;
+    transform: translateX(0);
   }
 }
+.letter-adding {
+  animation: pop-box 0.2s ease-out, swipe-right 0.2s ease-out forwards;
+}
+
 @keyframes swipe-left {
   0% {
-    text-indent: 0;
+    transform: translateX(0);
   }
   100% {
-    text-indent: -500%;
+    transform: translateX(-500%);
   }
 }
-.game-board__letter {
-  overflow: hidden;
+.letter-removing {
+  animation: swipe-left 0.2s ease-in forwards;
 }
 
-@keyframes push-button {
+@keyframes rotate-cell {
   50% {
-    opacity: 0.75;
-    scale: 0.75;
-    translate: 0 5px;
+    scale: 0.1;
+  }
+  100% {
+    rotate: 1 1 1 360deg;
   }
 }
-.keyboard__letter:not(.keyboard__letter[aria-label=Backspace]):not(.keyboard__letter[aria-label=Enter]) {
-  transition: opacity, scale, translate 0.1s ease-out;
-}
-
-.keyboard__letter[aria-label=Backspace],
-.keyboard__letter[aria-label=Enter] {
-  transition: opacity, background-color, scale, translate 0.1s ease-out;
+.game-board-validation {
+  animation: rotate-cell 1s ease-out;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  .keyboard__letter:active:not(.keyboard__letter[aria-label=Backspace]):not(.keyboard__letter[aria-label=Enter]) {
-    animation: push-button 0.1s ease-out;
+@keyframes giggle-row {
+  0% {
+    transform: translateX(-4px);
   }
-  .keyboard__letter[aria-label=Backspace],
-  .keyboard__letter[aria-label=Enter] {
-    transition: background-color, scale, translate 0.2s ease-out;
+  20% {
+    transform: translateX(8px);
   }
-  .keyboard__letter[aria-label=Backspace]:active {
+  30% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  50% {
+    transform: translateX(-8px);
+  }
+  60% {
+    transform: translateX(8px);
+  }
+  70% {
+    transform: translateX(-8px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  90% {
+    transform: translateX(-8px);
+  }
+}
+@keyframes rejection-cell {
+  5% {
+    border: 2px solid #A22023;
+  }
+  95% {
+    border: 2px solid #A22023;
+  }
+}
+.row-rejection {
+  animation: giggle-row 0.5s ease-in-out;
+}
+
+.cell-rejection {
+  animation: rejection-cell 0.8s ease-in-out;
+}
+
+@keyframes validation-animation {
+  20% {
+    color: transparent;
+  }
+  40% {
+    rotate: 0 1 0 100deg;
+    color: #f5f5f5;
+    background-color: #f5f5f5;
+  }
+  80% {
+    color: transparent;
+  }
+  100% {
+    rotate: 0 1 0 0deg;
+  }
+}
+@keyframes letter-click {
+  100% {
     opacity: 0.85;
     scale: 0.9;
     translate: 0 2px;
-    background-color: #d11a2a;
   }
-  .keyboard__letter[aria-label=Enter]:active {
+}
+@keyframes backspace-click {
+  100% {
+    opacity: 0.85;
+    scale: 0.9;
+    translate: 0 2px;
+    background-color: #b22222;
+  }
+}
+@keyframes enter-click {
+  100% {
     opacity: 0.85;
     scale: 0.9;
     translate: 0 2px;
     background-color: #5d9b55;
+  }
+}
+.keyboard-validation {
+  animation: validation-animation 1s ease-in-out;
+}
+
+.letter-typing {
+  animation: letter-click 0.1s ease-out forwards;
+}
+
+.backspace-typing {
+  animation: backspace-click 0.1s ease-out forwards;
+}
+
+.enter-typing {
+  animation: enter-click 0.1s ease-out forwards;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .keyboard__letter:active {
+    animation: letter-click 0.15s ease-out forwards;
+  }
+  .backspace-button:active {
+    animation: backspace-click 0.15s ease-out forwards;
+  }
+  .enter-button:active {
+    animation: enter-click 0.15s ease-out forwards;
   }
 }
 @media (hover: hover) and (pointer: fine) {
@@ -71,20 +178,14 @@
     opacity: 0.85;
     transform: scale(1.03) translateY(-3px);
   }
-  .keyboard__letter:active:not(.keyboard__letter[aria-label=Backspace]):not(.keyboard__letter[aria-label=Enter]) {
-    animation: push-button 0.1s ease-out;
+  .keyboard__letter:active {
+    animation: letter-click 0.1s ease-out forwards;
   }
-  .keyboard__letter[aria-label=Backspace]:active {
-    opacity: 0.85;
-    scale: 0.9;
-    translate: 0 2px;
-    background-color: #d11a2a;
+  .backspace-button:active {
+    animation: backspace-click 0.1s ease-out forwards;
   }
-  .keyboard__letter[aria-label=Enter]:active {
-    opacity: 0.85;
-    scale: 0.9;
-    translate: 0 2px;
-    background-color: #5d9b55;
+  .enter-button:active {
+    animation: enter-click 0.1s ease-out forwards;
   }
 }
 
