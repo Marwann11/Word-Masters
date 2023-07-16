@@ -452,7 +452,8 @@ async function checkWord(wordOfTheDay, userInput) {
   if (!validWord || validWord === undefined) return false;
 
   // initial similarity between user input and word of the day
-  let similarLetters = [false, false, false, false, false];
+  let similarLetters = Array.from(userInput, () => false);
+  console.log(similarLetters);
   // unify input
   wordOfTheDay = wordOfTheDay.toLowerCase();
   userInput = userInput.toLowerCase();
@@ -464,7 +465,7 @@ async function checkWord(wordOfTheDay, userInput) {
       if (userInput[j] === wordOfTheDay[i] && i === j) {
         similarLetters[j] = true;
         break;
-      } else if (userInput[j] === wordOfTheDay[i] && i !== j) { // if guessed letter in word at another position
+      } else if (userInput[j] === wordOfTheDay[i] && i !== j && similarLetters[j] === false) { // if guessed letter in word at another position
         similarLetters[j] = "close";
         break;
       }
@@ -486,20 +487,21 @@ async function handleValidation(wordOfTheDay, userInput) {
   if (wordOfTheDay === undefined) return false;
   // Get similar letters between user input and word of the day
   const similarLetters = await checkWord(wordOfTheDay, userInput);
-  // check if word is solved
-  for (let letter of similarLetters) {
-    if (letter === true) {
-      isSolved = true;
-    } else {
-      isSolved = false;
-      break;
-    }
-  }
 
   // if user input is invalid
   if (!similarLetters) {
     return false;
   } else {
+    // check if word is solved
+    for (let letter of similarLetters) {
+      if (letter === true) {
+        isSolved = true;
+      } else {
+        isSolved = false;
+        break;
+      }
+    }
+    // return similarLetters
     return similarLetters;
   }
 }

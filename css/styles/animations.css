@@ -104,7 +104,7 @@
 }
 
 .cell-rejection {
-  animation: rejection-cell 0.8s ease-in-out;
+  animation: rejection-cell 0.6s ease-in-out;
 }
 
 @keyframes validation-animation {
