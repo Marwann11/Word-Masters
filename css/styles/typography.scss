@@ -12,21 +12,28 @@ body {
 }
 
 header {
-  font-size: clamp(1.5rem, 3vmin, 2.25rem);
-  font-weight: 800;
-  font-variation-settings: "wdth" 87.5;
+  .title {
+    font-size: clamp(1.5rem, 2.5vmin, 2.25rem);
+    font-weight: 800;
+    font-variation-settings: "wdth" 87.5;
+  }
 }
 
 .feedback-message {
-  font-size: clamp(0.8rem, 0.75vmin, 1.5rem);
+  @media (max-width: 800px) {
+    font-size: clamp(0.6rem, 0.8vmax, 0.9rem);
+  }
+  @media (min-width: 800px) {
+    font-size: clamp(0.6rem, 0.6vmax, 0.75rem);
+  }
   font-weight: 800;
 }
 
 .game-board__letter {
   font-weight: 700;
-  font-size: clamp(1.25rem, 2.5vmin, 1.75rem);
+  font-size: clamp(1rem, 2.5vmin, 1.75rem);
 }
 
 .keyboard__letter {
-  font: 400 clamp(0.75rem, 2vmin, 1.25rem) "martian-mono", $fallback-fonts;
+  font: 400 clamp(0.75rem, 2vmax, 1.25rem) "martian-mono", $fallback-fonts;
 }

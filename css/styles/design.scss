@@ -21,11 +21,24 @@ body {
 }
 
 //* feedback components
-.feedback-message {
-  color: #ad0c0c;
+%feedback-properties {
+  opacity: 0;
+  border-radius: 5px;
 }
+
+.feedback-message {
+  @extend %feedback-properties;
+}
+
+//*Added Through JS
+.feedback-message {
+  color: #f3f3f3;
+  background-color: #212121;
+}
+
 .feedback-message--dark {
-  color: #f58f8f;
+  color: #212121;
+  background-color: #f3f3f3;
 }
 
 //* letters components

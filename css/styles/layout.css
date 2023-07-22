@@ -1,4 +1,4 @@
-.game-board .game-board__row .game-board__letter, .game-board .game-board__row, .game-container, .feedback-message, .feedback-container, header {
+.game-board .game-board__row .game-board__letter, .game-board .game-board__row, .game-container, .feedback-message, .feedback-container, header .controls-container, header .title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,23 +6,47 @@
 
 body {
   display: grid;
-  grid-template-rows: minmax(50px, 15vh) 50px minmax(550px, 75vh);
+  grid-template-rows: minmax(80px, 10vh) 50px minmax(550px, 80vh);
+}
+
+button {
+  cursor: pointer;
+}
+button img {
+  width: 30px;
+  height: 30px;
+  margin-block: -5px;
 }
 
 header {
+  display: grid;
+  grid-template-columns: 0.15fr 1fr 0.15fr;
+  grid-template-areas: ". title settings";
   margin-bottom: 20px;
 }
-header div {
-  padding: clamp(5px, 2.5vw, 30px);
+header .title {
+  grid-area: title;
+}
+header .controls-container {
+  grid-area: settings;
+  justify-content: space-evenly;
+  width: 150px;
+}
+header .controls-container button {
+  border: none;
 }
 
 .feedback-container {
-  transition: display 0.5s ease-out;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .feedback-message {
-  opacity: 0;
-  width: clamp(100px, 80vw, 1500px);
+  width: fit-content;
+  max-width: 90vw;
+  padding-inline: 20px;
+  padding-block: 7px;
+  z-index: 1;
 }
 
 .game-container {
@@ -40,7 +64,7 @@ header div {
   margin-bottom: 15px;
   margin-inline: 10px;
 }
-@media (max-width: 310px) {
+@media (max-width: 320px) {
   .game-board {
     width: 80vmin;
     height: 96vmin;
@@ -63,9 +87,9 @@ header div {
   row-gap: 10px;
   padding: 15px;
 }
-@media (max-width: 400px) {
+@media (max-width: 430px) {
   .keyboard {
-    padding: 8px;
+    padding: 6px;
   }
 }
 .keyboard .keyboard__row {
@@ -80,17 +104,11 @@ header div {
   padding-inline: 10px;
   padding-block: 12px;
 }
-@media (max-width: 400px) {
+@media (max-width: 430px) {
   .keyboard .keyboard__row .keyboard__letter {
     padding-inline: clamp(3px, 2vw, 10px);
     padding-block: clamp(4px, 2.2vw, 12px);
   }
-}
-
-.backspace-button img {
-  width: 30px;
-  height: 30px;
-  margin-block: -5px;
 }
 
 /*# sourceMappingURL=layout.css.map */

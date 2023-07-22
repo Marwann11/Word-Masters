@@ -1,29 +1,59 @@
 @import 'variables';
 
+//* General 
 body {
   display: grid;
-  grid-template-rows: minmax(50px, 15vh) 50px minmax(550px, 75vh);
+  grid-template-rows: minmax(80px, 10vh) 50px minmax(550px, 80vh);
 }
 
-header {
-  @extend %flex-object--centered;
-  margin-bottom: 20px;
-  div {
-    padding: clamp(5px, 2.5vw, 30px);
+button {
+  cursor: pointer;
+  img {
+    width: 30px;
+    height: 30px;
+    margin-block: -5px;
   }
 }
 
+//* header
+header {
+  display: grid;
+  grid-template-columns: 0.15fr 1fr 0.15fr;
+  grid-template-areas: 
+    ". title settings";
+  margin-bottom: 20px;
+  .title {
+    grid-area: title;
+    @extend %flex-object--centered;
+  }
+  .controls-container {
+    grid-area: settings;
+    @extend %flex-object--centered;
+    justify-content: space-evenly;
+    width: 150px;
+    button {
+      border: none;
+    }
+  }
+}
+
+//* feedback
 .feedback-container {
   @extend %flex-object--centered;
-  transition: display 0.5s ease-out;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .feedback-message {
   @extend %flex-object--centered;
-  opacity: 0;
-  width: clamp(100px, 80vw, 1500px);
+  width: fit-content;
+  max-width: 90vw;
+  padding-inline: 20px;
+  padding-block: 7px;
+  z-index: 1;
 }
 
+//* Game-board
 .game-container {
   @extend %flex-object--centered;
   flex-direction: column;
@@ -39,7 +69,7 @@ header {
   height: 360px;
   margin-bottom: 15px;
   margin-inline: 10px;
-  @media (max-width: 310px) {
+  @media (max-width: 320px) {
     width: 80vmin;
     height: calc(80vmin * 1.2);
   }
@@ -54,6 +84,7 @@ header {
   }
 }
 
+//* keyboard 
 .keyboard {
   grid-area: keyboard;
   display: flex;
@@ -62,8 +93,8 @@ header {
   align-items: center;
   row-gap: 10px;
   padding: 15px;
-  @media (max-width: 400px) {
-    padding: 8px;
+  @media (max-width: 430px) {
+    padding: 6px;
   }
   .keyboard__row {
     display: flex;
@@ -75,7 +106,7 @@ header {
       width: fit-content;
       padding-inline: 10px;
       padding-block: 12px;
-      @media (max-width: 400px) {
+      @media (max-width: 430px) {
         padding-inline: clamp(3px, 2vw, 10px);
         padding-block: clamp(4px, 2.2vw, 12px);
       }
@@ -83,8 +114,105 @@ header {
   }
 }
 
-.backspace-button img {
-  width: 30px;
-  height: 30px;
-  margin-block: -5px;
+//* overlay
+.settings-dialog {
+  
 }
+
+// //* close button
+// .close-button {
+//   position: absolute;
+//   top: 10px;
+//   right: 15px;
+//   cursor: pointer;
+// }
+
+// .close-button img {
+//   width: 35px;
+//   height: 35px;
+// }
+
+// //* settings
+// .settings-wrapper {
+//   // display: none;
+//   display: grid;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   grid-template-rows: 0.5fr repeat(2, 1fr) 50px;
+//   height: clamp(280px, 40vw, 450px);
+//   width: clamp(280px, 40vw, 400px);
+//   background-color: #fff;
+//   border-radius: 10px;
+//   z-index: 6;
+//   .settings__row {
+//     @extend %flex-object--centered;
+//     position: relative;
+//     justify-content: space-between;
+//     padding-left: 20px;
+//     padding-right: 35px;
+//   }
+//   .settings__row:first-child {
+//     justify-content: center;
+//   }
+//   .settings__row::before {
+//     content: "";
+//     position: absolute;
+//     background-color: #212121;
+//     width: 85%;
+//     height: 2px;
+//     bottom: 0;
+//   }
+//   .settings__row:last-child::before {
+//     display: none;
+//   }
+// }
+
+// //** Theme
+// //* theme-label 
+// .theme-label {
+
+// }
+// //* theme-button
+// .theme-button {
+//   .toggle-switch {
+//     @extend %flex-object--centered;
+//     position: relative;
+//     width: 40px;
+//     height: 20px;
+//     .toggle-switch__checkbox {
+//       display: none;
+//     }
+//     .toggle-switch__slider {
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       right: 0;
+//       bottom: 0;
+//       background-color: #212121;
+//       border-radius: 20px;
+//       cursor: pointer;
+//     }
+//     .toggle-switch__slider::before {
+//       content: "";
+//       position: absolute;
+//       height: 16px;
+//       width: 16px;
+//       right: 2px;
+//       bottom: 2px;
+//       background-color: #f3f3f3;
+//       border-radius: 50%;
+//       transition: 0.4s;
+//     }
+//     .toggle-switch__checkbox:checked + .toggle-switch__slider {
+//       background-color: #f3f3f3;
+//     }
+//     .toggle-switch__checkbox:checked + .toggle-switch__slider::before {
+//       background-color: #212121;
+//       transform: translateX(-20px);
+//     }
+//   }
+// }
+
+// //* Feedback
