@@ -8,10 +8,11 @@ body {
 
 button {
   cursor: pointer;
+  width: 50px;
+  height: 50px;
   img {
     width: 30px;
-    height: 30px;
-    margin-block: -5px;
+    height: 25px;
   }
 }
 
@@ -22,7 +23,7 @@ header {
   grid-template-areas: 
     ". title settings";
   margin-bottom: 20px;
-  .title {
+  .header__title {
     grid-area: title;
     @extend %flex-object--centered;
   }
@@ -106,7 +107,7 @@ header {
       width: fit-content;
       padding-inline: 10px;
       padding-block: 12px;
-      @media (max-width: 430px) {
+      @media (max-width: 450px) {
         padding-inline: clamp(3px, 2vw, 10px);
         padding-block: clamp(4px, 2.2vw, 12px);
       }
@@ -114,105 +115,148 @@ header {
   }
 }
 
-//* overlay
-.settings-dialog {
-  
+//* Dialogs
+%dialog-general-properties {
+  width: clamp(300px, 70vw, 600px);
+  height: clamp(380px, 50vh, 750px);
 }
 
-// //* close button
-// .close-button {
-//   position: absolute;
-//   top: 10px;
-//   right: 15px;
-//   cursor: pointer;
-// }
+dialog {
+  @extend %dialog-general-properties;
+  position: absolute;
+}
 
-// .close-button img {
-//   width: 35px;
-//   height: 35px;
-// }
+//* close button
+.close-button {
+  position: absolute;
+  top: -5px; 
+  right: -5px;
+}
 
-// //* settings
-// .settings-wrapper {
-//   // display: none;
-//   display: grid;
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   grid-template-rows: 0.5fr repeat(2, 1fr) 50px;
-//   height: clamp(280px, 40vw, 450px);
-//   width: clamp(280px, 40vw, 400px);
-//   background-color: #fff;
-//   border-radius: 10px;
-//   z-index: 6;
-//   .settings__row {
-//     @extend %flex-object--centered;
-//     position: relative;
-//     justify-content: space-between;
-//     padding-left: 20px;
-//     padding-right: 35px;
-//   }
-//   .settings__row:first-child {
-//     justify-content: center;
-//   }
-//   .settings__row::before {
-//     content: "";
-//     position: absolute;
-//     background-color: #212121;
-//     width: 85%;
-//     height: 2px;
-//     bottom: 0;
-//   }
-//   .settings__row:last-child::before {
-//     display: none;
-//   }
-// }
+.close-button img {
+  width: 100%;
+  height: 100%;
+}
 
-// //** Theme
-// //* theme-label 
-// .theme-label {
+//* settings
+.settings-wrapper {
+  display: grid;
+  grid-template-rows: 50px repeat(4, 1fr);
+  height: 100%;
+  width: 100%;
+  .settings__row {
+    @extend %flex-object--centered;
+    position: relative;
+    justify-content: space-between;
+    padding-inline: 40px;
+    @media (max-width: 500px) {
+      padding-inline: 0;
+    }
+  }
+  .settings__row:first-child {
+    justify-content: center;
+  }
+}
 
-// }
-// //* theme-button
-// .theme-button {
-//   .toggle-switch {
-//     @extend %flex-object--centered;
-//     position: relative;
-//     width: 40px;
-//     height: 20px;
-//     .toggle-switch__checkbox {
-//       display: none;
-//     }
-//     .toggle-switch__slider {
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       right: 0;
-//       bottom: 0;
-//       background-color: #212121;
-//       border-radius: 20px;
-//       cursor: pointer;
-//     }
-//     .toggle-switch__slider::before {
-//       content: "";
-//       position: absolute;
-//       height: 16px;
-//       width: 16px;
-//       right: 2px;
-//       bottom: 2px;
-//       background-color: #f3f3f3;
-//       border-radius: 50%;
-//       transition: 0.4s;
-//     }
-//     .toggle-switch__checkbox:checked + .toggle-switch__slider {
-//       background-color: #f3f3f3;
-//     }
-//     .toggle-switch__checkbox:checked + .toggle-switch__slider::before {
-//       background-color: #212121;
-//       transform: translateX(-20px);
-//     }
-//   }
-// }
+.row-separator {
+  content: "";
+  position: absolute;
+  width: 85%;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
 
-// //* Feedback
+//** Theme
+
+//* theme-container
+.theme-switch {
+  position: relative;
+  width: 50px;
+  height: 25px;
+}
+
+.switch-slider {
+  position: absolute;
+  right: 2.5px;
+  top: 2.2px;
+  height: 15px;
+  width: 15px;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+  }
+}
+
+
+//** How to play dialog
+.how-to-play-dialog {
+  width: clamp(300px, 90vw, 700px);
+  height: clamp(380px, 60vh, 850px);
+  .close-button {
+    top: -20px;
+    right: -15px;
+  }
+  .how-to-play__wrapper {
+    display: grid;
+    position: relative;
+    grid-template-rows: repeat(auto, auto);
+    .how-to-play__row {
+      display: flex;
+    }
+  }
+}
+
+.how-to-play__row:not(:first-child) {
+  img {
+    width: 35px;
+    height: 20px;
+    transform: translateY(5%);
+  }
+}
+
+
+.how-to-play__row:first-child,
+.how-to-play__row:nth-child(3),
+.how-to-play__row:nth-child(4),
+.how-to-play__row:nth-child(5) {
+  justify-content: center;
+}
+
+.how-to-play__info {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  padding: 10px;
+}
+
+.align-start {
+  width: max-content;
+  align-self: flex-start;
+}
+
+.fake-game-row {
+  @extend %flex-object--centered;
+  .fake-letter {
+    @extend %flex-object--centered;
+    width: 30px;
+    height: 30px;
+    margin-inline: 2px;
+  }
+  margin-bottom: 30px;
+}
+
+.column-row {
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-subheader {
+  display: inline-flex;
+  width: fit-content;
+  width: -moz-fit-content;
+}

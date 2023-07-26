@@ -6,7 +6,7 @@ body {
   font-family: "martian-mono", "Inconsolata", "Ubuntu Mono", "Roboto Mono", monospace;
 }
 
-header .title {
+header .header__title {
   font-size: clamp(1.5rem, 2.5vmin, 2.25rem);
   font-weight: 800;
   font-variation-settings: "wdth" 87.5;
@@ -33,6 +33,12 @@ header .title {
 
 .keyboard__letter {
   font: 400 clamp(0.75rem, 2vmax, 1.25rem) "martian-mono", "Inconsolata", "Ubuntu Mono", "Roboto Mono", monospace;
+}
+
+.subheader-text {
+  font-size: 80%;
+  line-height: 170%;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=typography.css.map */

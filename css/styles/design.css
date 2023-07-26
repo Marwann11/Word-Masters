@@ -12,11 +12,24 @@ body {
   background-color: #212121;
 }
 
+a {
+  color: #1E88E5;
+}
+
+a:hover {
+  color: rgba(30, 136, 229, 0.7490196078);
+}
+
+button:focus-visible {
+  outline: 2px solid #349EEA;
+}
+
 header {
   border-bottom: 5px solid transparent;
 }
 
-header div {
+.settings__row:first-child,
+.how-to-play__row:first-child, header .header__title {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -37,13 +50,13 @@ header div {
   background-color: #f3f3f3;
 }
 
-.game-board__letter {
-  border: 2px solid #a9a9a9;
+.fake-letter, .game-board__letter {
+  border: 1px solid #bebebe;
   border-radius: 5px;
 }
 
-.game-board__letter--dark-correct, .game-board__letter--dark-close, .game-board__letter--dark-missing, .game-board__letter--dark {
-  border: 2px solid #777777;
+.fake-letter--correct-dark, .fake-letter--close-dark, .fake-letter--missing-dark, .fake-letter--dark, .game-board__letter--correct-dark, .game-board__letter--close-dark, .game-board__letter--missing-dark, .game-board__letter--dark {
+  border: 1px solid #999999;
   border-radius: 5px;
 }
 
@@ -56,45 +69,49 @@ header div {
 header {
   border-color: #1E88E5;
 }
-@supports (border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1) {
+@supports (border-image: linear-gradient(120deg, #1E88E5, #64B5F6) 1) {
   header {
-    border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+    border-image: linear-gradient(120deg, #1E88E5, #64B5F6) 1;
   }
 }
-header div {
-  background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
-  background-image: -webkit-linear-gradient(120deg, #64B5F6, #1E88E5);
+header .header__title {
+  background-image: linear-gradient(120deg, #1E88E5, #64B5F6);
+  background-image: -webkit-linear-gradient(120deg, #1E88E5, #64B5F6);
   background-color: #1E88E5;
+}
+header button {
+  background-color: transparent;
+  border: none;
 }
 
 .header--dark {
   border-color: #46a4f7;
 }
-@supports (border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1) {
+@supports (border-image: linear-gradient(120deg, #50abfc, #83c6fd) 1) {
   .header--dark {
-    border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
+    border-image: linear-gradient(120deg, #50abfc, #83c6fd) 1;
   }
 }
-.header--dark .header__div--dark {
-  background-image: linear-gradient(120deg, #8ecafc, #46a4f7);
-  background-image: -webkit-linear-gradient(120deg, #8ecafc, #46a4f7);
+.header--dark .header__title--dark {
+  background-image: linear-gradient(120deg, #50abfc, #83c6fd);
+  background-image: -webkit-linear-gradient(120deg, #50abfc, #83c6fd);
   background-color: #8ecafc;
 }
 
 .game-board__letter {
   background-color: transparent;
-  color: #000;
+  color: #212121;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .game-board__letter--missing {
-  background-color: #505050;
+  background-color: #5f5f5f;
   color: #f3f3f3;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .game-board__letter--close {
-  background-color: #b6b23c;
+  background-color: #acac0d;
   color: #f3f3f3;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -107,23 +124,23 @@ header div {
 
 .game-board__letter--dark {
   background-color: transparent;
-  color: #fff;
-  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
-}
-
-.game-board__letter--dark-missing {
-  background-color: #525252;
   color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
-.game-board__letter--dark-close {
-  background-color: #b49c30;
-  color: #fff;
+.game-board__letter--missing-dark {
+  background-color: #4e4e4e;
+  color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
-.game-board__letter--dark-correct {
+.game-board__letter--close-dark {
+  background-color: #acac0d;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.game-board__letter--correct-dark {
   background-color: #5d9b55;
   color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
@@ -137,19 +154,23 @@ header div {
 }
 
 .keyboard__letter {
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: #f3f3f3;
+  color: #212121;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.keyboard__letter:focus-visible {
+  outline: 2px solid #349EEA;
+}
+
 .keyboard__letter--missing {
-  background-color: #505050;
+  background-color: #5f5f5f;
   color: #f3f3f3;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .keyboard__letter--close {
-  background-color: #b6b23c;
+  background-color: #acac0d;
   color: #f3f3f3;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -166,28 +187,170 @@ header div {
   background-color: #ADA996;
 }
 
+.keyboard__letter--dark:focus-visible {
+  outline: 2px solid #5EB7F9;
+}
+
 .keyboard__letter--dark {
   background-color: #212121;
-  color: whitesmoke;
+  color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
-.keyboard__letter--dark-missing {
-  background-color: #bdbdbd;
-  color: #212121;
+.keyboard__letter--missing-dark {
+  background-color: #4e4e4e;
+  color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
-.keyboard__letter--dark-close {
-  background-color: #b49c30;
-  color: whitesmoke;
+.keyboard__letter--close-dark {
+  background-color: #acac0d;
+  color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
-.keyboard__letter--dark-correct {
+.keyboard__letter--correct-dark {
   background-color: #5d9b55;
-  color: whitesmoke;
+  color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+dialog {
+  color: #212121;
+  background-color: #f3f3f3;
+  border: 2px solid #212121;
+  border-radius: 7px;
+}
+
+.dialog--dark {
+  color: #f3f3f3;
+  background-color: #212121;
+  border: 2px solid #f3f3f3;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+.close-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.settings__row:first-child,
+.how-to-play__row:first-child {
+  background-image: linear-gradient(120deg, #1E88E5, #64B5F6);
+  background-image: -webkit-linear-gradient(120deg, #1E88E5, #64B5F6);
+  background-color: #1E88E5;
+}
+
+.row-separator {
+  background-color: #212121;
+}
+
+.row-separator--dark {
+  background-color: #f3f3f3;
+}
+
+.theme-switch {
+  background-color: #ffac45;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.theme-switch--dark {
+  background-color: #0093fa;
+}
+
+.switch__checkbox {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.switch-slider {
+  border-radius: 50%;
+  transition: transform 0.5s;
+  background-color: #f3f3f3;
+  padding: 10px;
+}
+.switch-slider img:last-child {
+  opacity: 0;
+}
+
+.switch__checkbox:checked + .switch-slider {
+  transform: translateX(-25px);
+}
+.switch__checkbox:checked + .switch-slider img:first-child {
+  opacity: 0;
+}
+.switch__checkbox:checked + .switch-slider img:last-child {
+  opacity: 1;
+}
+
+.fake-letter {
+  background-color: transparent;
+  color: #212121;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  font-weight: 700;
+}
+
+.fake-letter--missing {
+  background-color: #5f5f5f;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.fake-letter--close {
+  background-color: #acac0d;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.fake-letter--correct {
+  background-color: #5d9b55;
+  color: #f3f3f3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.fake-letter--dark {
+  background-color: transparent;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.fake-letter--missing-dark {
+  background-color: #4e4e4e;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.fake-letter--close-dark {
+  background-color: #acac0d;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.fake-letter--correct-dark {
+  background-color: #5d9b55;
+  color: #f3f3f3;
+  box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+}
+
+.info-subheader {
+  padding: 10px;
+}
+
+.subheader-text {
+  color: #f3f3f3;
+  background-color: #212121;
+  border-radius: 10px;
+}
+
+.subheader-text--dark {
+  color: #212121;
+  background-color: #f3f3f3;
 }
 
 /*# sourceMappingURL=design.css.map */

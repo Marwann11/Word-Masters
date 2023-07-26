@@ -1,5 +1,5 @@
 "use strict";
-import {handleKeydownEvent, handleKeyupEvent, handleKeyboardClicks, handleSettingsButton} from "./modules/helper.mjs"
+import {handleKeydownEvent, handleKeyupEvent, handleKeyboardClicks, handleButtonsEvents} from "./modules/helper.mjs"
 
 function main() {
   handleKeydownEvent();
@@ -8,11 +8,7 @@ function main() {
 
   handleKeyboardClicks();
 
-  handleSettingsButton();
-
-  // handleThemeButton();
-
-  // handleHowToPlayButton();
+  handleButtonsEvents();
 }
 
 main();

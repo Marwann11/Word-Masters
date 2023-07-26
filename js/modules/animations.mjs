@@ -27,6 +27,7 @@ function addingAnimation(rowCells) {
   // find last occupied cell
   let lastOccupiedCell;
   for (let cell of rowCells) if (cell.innerText !== "") lastOccupiedCell = cell
+  
   // choose cell Text Element
   let cellText = lastOccupiedCell.querySelector(".letter-text");
   // add animations to the cell
@@ -71,6 +72,7 @@ function validationAnimation(rowCells, validationArray, keyboardButtons) {
     }
     // current relative validation cell value
     let validationCell = validationArray[i];
+    const currentTheme = document.querySelector(".switch__checkbox").getAttribute("data-theme");
 
     // animate gameBoard cell
     currentCell.classList.add("game-board-validation");
@@ -80,21 +82,59 @@ function validationAnimation(rowCells, validationArray, keyboardButtons) {
     keyboardButton.style.animationDelay = `${i * animationDelay}s`;
     setTimeout(() => {
       if (validationCell === true) {
+        // add default classes
         currentCell.classList.add("game-board__letter--correct");
         keyboardButton.classList.add("keyboard__letter--correct");
+
+        // check for dark theme and apply related classes if so
+        if (currentTheme === "dark") {
+          currentCell.classList.add("game-board__letter--correct-dark");
+          keyboardButton.classList.add("keyboard__letter--correct-dark");
+        }
       } else if (validationCell === "close") {
         currentCell.classList.add("game-board__letter--close");
         keyboardButton.classList.add("keyboard__letter--close");
+
+        if (currentTheme === "dark") {
+          currentCell.classList.add("game-board__letter--close-dark");
+          keyboardButton.classList.add("keyboard__letter--close-dark");
+        }
       } else {
         currentCell.classList.add("game-board__letter--missing");
         keyboardButton.classList.add("keyboard__letter--missing");
+
+        if (currentTheme === "dark") {
+          currentCell.classList.add("game-board__letter--missing-dark");
+          keyboardButton.classList.add("keyboard__letter--missing-dark");
+        }
       }
     }, 500 + (i * (animationDelay * 1000)));
+
     // remove keyboard animation after finishing
     setTimeout(() => {
       keyboardButton.classList.remove("keyboard-validation");
       keyboardButton.style.removeProperty("animation-delay");
     }, 1000 + (i * (animationDelay * 1000)));
+  }
+}
+
+// function to mimic validation animation for dialog test cells
+function fakeValidationAnimation(rowCells) {
+  let animationDelay = 150;
+
+  for (let i = 0; i < rowCells.length; i++) {
+    // get current cell
+    let currentCell = rowCells[i];
+
+    // animate fake cell
+    setTimeout(() => {
+      currentCell.classList.add("game-board-validation");
+    }, 200 + (i * (animationDelay)))
+
+    // remove cell animation after finishing
+    setTimeout(() => {
+      currentCell.classList.remove("game-board-validation")
+    }, 1200 + (i * (animationDelay)));
   }
 }
 
@@ -172,4 +212,16 @@ const fun = () => {
 it just feels like, you're always pushing me away 😢`);
 }
 
-export {cellAnimation, keyboardAnimation, removeKeyboardAnimations};
+function dialogsEntryAnimation(dialog) {
+  dialog.classList.add("dialog-entry");
+}
+
+function dialogsExitAnimation(dialog) {
+  dialog.classList.remove("dialog-entry");
+  dialog.classList.add("dialog-exit");
+  setTimeout(() => {
+    dialog.classList.remove("dialog-exit");
+  }, 500)
+}
+
+export {cellAnimation, keyboardAnimation, removeKeyboardAnimations, dialogsEntryAnimation, dialogsExitAnimation, fakeValidationAnimation};

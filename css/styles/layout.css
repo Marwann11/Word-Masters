@@ -1,4 +1,4 @@
-.game-board .game-board__row .game-board__letter, .game-board .game-board__row, .game-container, .feedback-message, .feedback-container, header .controls-container, header .title {
+.fake-game-row .fake-letter, .fake-game-row, .settings-wrapper .settings__row, .game-board .game-board__row .game-board__letter, .game-board .game-board__row, .game-container, .feedback-message, .feedback-container, header .controls-container, header .header__title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,11 +11,12 @@ body {
 
 button {
   cursor: pointer;
+  width: 50px;
+  height: 50px;
 }
 button img {
   width: 30px;
-  height: 30px;
-  margin-block: -5px;
+  height: 25px;
 }
 
 header {
@@ -24,7 +25,7 @@ header {
   grid-template-areas: ". title settings";
   margin-bottom: 20px;
 }
-header .title {
+header .header__title {
   grid-area: title;
 }
 header .controls-container {
@@ -104,11 +105,144 @@ header .controls-container button {
   padding-inline: 10px;
   padding-block: 12px;
 }
-@media (max-width: 430px) {
+@media (max-width: 450px) {
   .keyboard .keyboard__row .keyboard__letter {
     padding-inline: clamp(3px, 2vw, 10px);
     padding-block: clamp(4px, 2.2vw, 12px);
   }
+}
+
+dialog {
+  width: clamp(300px, 70vw, 600px);
+  height: clamp(380px, 50vh, 750px);
+}
+
+dialog {
+  position: absolute;
+}
+
+.close-button {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.close-button img {
+  width: 100%;
+  height: 100%;
+}
+
+.settings-wrapper {
+  display: grid;
+  grid-template-rows: 50px repeat(4, 1fr);
+  height: 100%;
+  width: 100%;
+}
+.settings-wrapper .settings__row {
+  position: relative;
+  justify-content: space-between;
+  padding-inline: 40px;
+}
+@media (max-width: 500px) {
+  .settings-wrapper .settings__row {
+    padding-inline: 0;
+  }
+}
+.settings-wrapper .settings__row:first-child {
+  justify-content: center;
+}
+
+.row-separator {
+  content: "";
+  position: absolute;
+  width: 85%;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.theme-switch {
+  position: relative;
+  width: 50px;
+  height: 25px;
+}
+
+.switch-slider {
+  position: absolute;
+  right: 2.5px;
+  top: 2.2px;
+  height: 15px;
+  width: 15px;
+}
+.switch-slider img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+.how-to-play-dialog {
+  width: clamp(300px, 90vw, 700px);
+  height: clamp(380px, 60vh, 850px);
+}
+.how-to-play-dialog .close-button {
+  top: -20px;
+  right: -15px;
+}
+.how-to-play-dialog .how-to-play__wrapper {
+  display: grid;
+  position: relative;
+  grid-template-rows: repeat(auto, auto);
+}
+.how-to-play-dialog .how-to-play__wrapper .how-to-play__row {
+  display: flex;
+}
+
+.how-to-play__row:not(:first-child) img {
+  width: 35px;
+  height: 20px;
+  transform: translateY(5%);
+}
+
+.how-to-play__row:first-child,
+.how-to-play__row:nth-child(3),
+.how-to-play__row:nth-child(4),
+.how-to-play__row:nth-child(5) {
+  justify-content: center;
+}
+
+.how-to-play__info {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  padding: 10px;
+}
+
+.align-start {
+  width: max-content;
+  align-self: flex-start;
+}
+
+.fake-game-row {
+  margin-bottom: 30px;
+}
+.fake-game-row .fake-letter {
+  width: 30px;
+  height: 30px;
+  margin-inline: 2px;
+}
+
+.column-row {
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-subheader {
+  display: inline-flex;
+  width: fit-content;
+  width: -moz-fit-content;
 }
 
 /*# sourceMappingURL=layout.css.map */

@@ -238,7 +238,7 @@ function handleRemainingDifferences(differencesMap, similarLetters) {
   * handleValidation returns:
   * false => in case of invalid user input
   * Array that represents similarity between userInput and word of the day
-  * based on index of characters => in case of valid user input
+  * based on index of characters => in case of a valid user input
 */
 
 async function handleValidation(wordOfTheDay, userInput) {

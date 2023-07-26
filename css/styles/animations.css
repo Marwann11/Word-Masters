@@ -203,5 +203,60 @@
     animation: enter-click 0.1s ease-out forwards;
   }
 }
+@keyframes dialog-entry {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.dialog-entry {
+  animation: dialog-entry 0.5s ease-out forwards;
+}
+
+@keyframes dialog-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.dialog-exit {
+  animation: dialog-exit 0.5s ease-in forwards;
+}
+
+@keyframes snake-move {
+  50% {
+    transform: translateY(-50%);
+  }
+}
+.fake-game-row:hover :nth-child(n+0) {
+  animation: snake-move 0.3s ease-in-out 0s;
+}
+.fake-game-row:hover :nth-child(n+1) {
+  animation: snake-move 0.3s ease-in-out 0.1s;
+}
+.fake-game-row:hover :nth-child(n+2) {
+  animation: snake-move 0.3s ease-in-out 0.2s;
+}
+.fake-game-row:hover :nth-child(n+3) {
+  animation: snake-move 0.3s ease-in-out 0.3s;
+}
+.fake-game-row:hover :nth-child(n+4) {
+  animation: snake-move 0.3s ease-in-out 0.4s;
+}
+.fake-game-row:hover :nth-child(n+5) {
+  animation: snake-move 0.3s ease-in-out 0.5s;
+}
 
 /*# sourceMappingURL=animations.css.map */

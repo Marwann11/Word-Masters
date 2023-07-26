@@ -254,3 +254,53 @@
     animation: enter-click 0.1s ease-out forwards;
   }
 }
+
+//* Dialogs Animations
+
+@keyframes dialog-entry {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.dialog-entry {
+  animation: dialog-entry 0.5s ease-out forwards;
+}
+
+@keyframes dialog-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.dialog-exit {
+  animation: dialog-exit 0.5s ease-in forwards;
+}
+
+@keyframes snake-move {
+  50% {
+    transform: translateY(-50%);
+  }
+}
+
+.fake-game-row:hover {
+  @for $i from 0 through 5 {
+    :nth-child(n + #{$i}) {
+      animation: snake-move 0.3s ease-in-out (0.1s * $i);
+    }
+  }
+}

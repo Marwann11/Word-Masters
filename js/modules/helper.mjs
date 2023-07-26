@@ -1,7 +1,7 @@
-import {handleInput} from './input.mjs';
-import {cellAnimation, keyboardAnimation, removeKeyboardAnimations} from './animations.mjs';
-import {fetchWordOfTheDay, rowCheck, assembleWord, handleValidation, userProgress} from './validation.mjs';
-// import {} from './modules/buttons.mjs';
+import { handleInput } from './input.mjs';
+import { cellAnimation, keyboardAnimation, removeKeyboardAnimations } from './animations.mjs';
+import { fetchWordOfTheDay, rowCheck, assembleWord, handleValidation, userProgress } from './validation.mjs';
+import { handleSettingsButton, handleThemeButton, handleHowToPlayButton } from './buttons.mjs';
 
 
 //********************* */
@@ -25,31 +25,42 @@ let cellsChanged = false;
 function handleKeydownEvent() {
   // pressing user keyboard buttons event
   document.body.addEventListener("keydown", onKeyDown);
+}
 
-  async function onKeyDown(ev) {
-    // current active gameBoard row
-    const rowCells = document.querySelectorAll(".game-board__row")[userProgress.currentRow].children;
-    // pressed key value
-    const key = ev.key;
-    // check if gameBoard values has been changed
-    cellsChanged = handleInput(rowCells, key);
-  
-    if (cellsChanged) {
-      // typing animation only
-      if (key !== "Backspace" && key !== "Enter") cellAnimation(rowCells, key);
-  
+async function onKeyDown(ev) {
+  // current active gameBoard row
+  const rowCells = document.querySelectorAll(".game-board__row")[userProgress.currentRow].children;
+  // pressed key value
+  const key = ev.key;
+  // check if gameBoard values has been changed
+  cellsChanged = handleInput(rowCells, key);
+
+  if (cellsChanged) {
+    // typing animation only
+    if (key !== "Backspace" && key !== "Enter") cellAnimation(rowCells, key);
+
+    // handle enter key animation in the enter validation block
+    if (key !== "Enter") {
       keyboardAnimation(keyboardBtns, key);
-  
-      // if validation
-      if (key === "Enter") {
+    }
+
+    // if validation
+    if (key === "Enter") {
+      // check the current focused element
+      const currentFocusedElement = document.activeElement;
+      // apply only if the focused element is the body or the Enter button
+      if (currentFocusedElement instanceof HTMLBodyElement ||
+        currentFocusedElement.classList.contains(".enter-button")) {
+        // handle enter keyboard animation
+        keyboardAnimation(keyboardBtns, key);
         // check for row completeness
         let rowComplete = rowCheck(rowCells);
-  
+
         if (rowComplete) {
           // get user input and handle validation and animation
           const userInput = assembleWord(rowCells);
           const similarLetters = await handleValidation(wordOfTheDay, userInput, rowCells, keyboardBtns);
-  
+
           if (similarLetters === false) {
             // do invalid word animation
             cellAnimation(rowCells, "enter");
@@ -62,7 +73,7 @@ function handleKeydownEvent() {
             if (userProgress.isSolved) {
               document.body.removeEventListener("keydown", onKeyDown);
               document.body.removeEventListener("keyup", onKeyUp);
-              keyboardContainer.removeEventListener("click", onKeyboardClick);
+              keyboardContainer.removeEventListener("Button", onKeyboardClick);
             }
             if (userProgress.currentRow < 6 && !userProgress.isSolved) {
               userProgress.currentRow++;
@@ -74,11 +85,9 @@ function handleKeydownEvent() {
   }
 }
 
-
 function handleKeyupEvent() {
   // releasing user keyboard buttons event
   document.body.addEventListener("keyup", onKeyUp);
-
 }
 
 function onKeyUp(ev) {
@@ -122,7 +131,7 @@ async function onKeyboardClick(ev) {
         // Animate changes to row cells and keyboard buttons based on their similarity
         cellAnimation(rowCells, "enter", similarLetters, keyboardBtns);
         // Mark row as completed
-        document.querySelectorAll(".game-board__row")[currentRow].dataset.state = "Done";
+        document.querySelectorAll(".game-board__row")[userProgress.currentRow].dataset.state = "Done";
         // update the row
         if (userProgress.isSolved) {
           document.body.removeEventListener("keydown", onKeyDown);
@@ -141,10 +150,12 @@ async function onKeyboardClick(ev) {
   }
 }
 
-function handleSettingsButton() {
-  console.log("some settings button clicked");
+function handleButtonsEvents() {
+  handleSettingsButton();
+  handleThemeButton();
+  handleHowToPlayButton();
 }
 
 
 //* Export functions 
-export {handleKeydownEvent, handleKeyupEvent, handleKeyboardClicks, handleSettingsButton};
+export { handleKeydownEvent, handleKeyupEvent, handleKeyboardClicks, handleButtonsEvents, onKeyDown, onKeyUp };

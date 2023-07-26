@@ -2,11 +2,23 @@
 
 //* General
 body {
-  background-color: #f3f3f3;
+  background-color: $main-light;
 }
 
 .body--dark {
-  background-color: #212121;
+  background-color: $main-dark;
+}
+
+a {
+  color: #1E88E5;
+}
+
+a:hover {
+  color: #1e88e5bf;
+}
+
+button:focus-visible {
+  outline: $tab-outline--light;
 }
 
 //* header components
@@ -32,23 +44,23 @@ body {
 
 //*Added Through JS
 .feedback-message {
-  color: #f3f3f3;
-  background-color: #212121;
+  color: $main-light;
+  background-color: $main-dark;
 }
 
 .feedback-message--dark {
-  color: #212121;
-  background-color: #f3f3f3;
+  color: $main-dark;
+  background-color: $main-light;
 }
 
 //* letters components
 %letters--light-border {
-  border: 2px solid #a9a9a9;
+  border: 1px solid #bebebe;
   border-radius: 5px;
 }
 
 %letters--dark-border {
-  border: 2px solid #777777;
+  border: 1px solid #999999;
   border-radius: 5px;
 }
 
@@ -67,27 +79,31 @@ body {
 
 //* header
 header {
-  @supports (border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1) {
-    border-image: linear-gradient(90deg, #1E88E5, #64B5F6) 1;
+  @supports (border-image: $blue-gradient--light 1) {
+    border-image: $blue-gradient--light 1;
   }
   border-color: #1E88E5; // fallback for older browsers
   @extend %header-border; 
-  div {
-    background-image: linear-gradient(120deg, #64B5F6, #1E88E5);
-    background-image: -webkit-linear-gradient(120deg, #64B5F6, #1E88E5);
+  .header__title {
+    background-image: $blue-gradient--light;
+    background-image: $-webkit-blue-gradient--light;
     background-color: #1E88E5; // fallback for older browsers
     @extend %header-bkg__text;
+  }
+  button {
+    background-color: transparent;
+    border: none;
   }
 }
 
 .header--dark {
-  @supports (border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1) {
-    border-image: linear-gradient(90deg, #46a4f7, #8ecafc) 1;
+  @supports (border-image: $blue-gradient--dark 1) {
+    border-image: $blue-gradient--dark 1;
   }
   border-color: #46a4f7; // fallback for older browsers
-  .header__div--dark {
-    background-image: linear-gradient(120deg, #8ecafc, #46a4f7);
-    background-image: -webkit-linear-gradient(120deg, #8ecafc, #46a4f7);
+  .header__title--dark {
+    background-image: $blue-gradient--dark;
+    background-image: $-webkit-blue-gradient--dark;
     background-color: #8ecafc; // fallback for older browsers
   }
 }
@@ -95,88 +111,230 @@ header {
 //* game-board
 //** light-theme
 .game-board__letter {
-  @include letters--theme(transparent, #000, $box-shadow--light);
+  @include letters--theme(transparent, $letter-color--light, $box-shadow--light);
   @extend %letters--light-border;
 }
 
 .game-board__letter--missing {
-  @include letters--theme(#505050, #f3f3f3, $box-shadow--light);
+  @include letters--theme($letter-bkg--missing-light, $letter-color--missing-light, $box-shadow--light);
 }
 
 .game-board__letter--close {
-  @include letters--theme(#b6b23c, #f3f3f3, $box-shadow--light);
+  @include letters--theme($letter-bkg--close-light, $letter-color--close-light, $box-shadow--light);
 }
 
 .game-board__letter--correct {
-  @include letters--theme(#5d9b55, #f3f3f3, $box-shadow--light);
+  @include letters--theme($letter-bkg--correct-light, $letter-color--correct-light, $box-shadow--light);
 }
 
 //** dark-theme
 .game-board__letter--dark {
-  @include letters--theme(transparent, #fff, $box-shadow--dark);
+  @include letters--theme(transparent, $letter-color--dark, $box-shadow--dark);
   @extend %letters--dark-border;
 }
 
-.game-board__letter--dark-missing {
-  @include letters--theme(#525252, #f3f3f3, $box-shadow--dark);
+.game-board__letter--missing-dark {
+  @include letters--theme($letter-bkg--missing-dark, $letter-color--missing-dark, $box-shadow--dark);
   @extend %letters--dark-border;
 }
 
-.game-board__letter--dark-close {
-  @include letters--theme(#b49c30, #fff, $box-shadow--dark);
+.game-board__letter--close-dark {
+  @include letters--theme($letter-bkg--close-dark, $letter-color--close-dark, $box-shadow--dark);
   @extend %letters--dark-border;
 }
 
-.game-board__letter--dark-correct {
-  @include letters--theme(#5d9b55, #f3f3f3, $box-shadow--dark);
+.game-board__letter--correct-dark {
+  @include letters--theme($letter-bkg--correct-dark, $letter-color--correct-dark, $box-shadow--dark);
   @extend %letters--dark-border;
 }
 
 //* keyboard
 //** light-theme
 .keyboard {
-  background-image: linear-gradient(to top, #232526, #414345);
-  background-image: -webkit-linear-gradient(to top, #232526, #414345);
+  background-image: $keyboard-bkg--light;
+  background-image: $-webkit-keyboard-bkg--light;
   background-color: #414345; // fallback for old browsers
   border-radius: 15px;
 }
 
 .keyboard__letter {
-  @include letters--theme(#f5f5f5, #000, $box-shadow--light);
+  @include letters--theme($letter-bkg--light, $letter-color--light, $box-shadow--light);
   @extend %keyboard-letter--properties;
 }
 
+.keyboard__letter:focus-visible {
+  outline: $tab-outline--light;
+}
+
 .keyboard__letter--missing {
-  @include letters--theme(#505050, #f3f3f3, $box-shadow--light);
+  @include letters--theme($letter-bkg--missing-light, $letter-color--missing-light, $box-shadow--light);
 }
 
 .keyboard__letter--close {
-  @include letters--theme(#b6b23c, #f3f3f3, $box-shadow--light);
+  @include letters--theme($letter-bkg--close-light, $letter-color--close-light, $box-shadow--light);
 }
 
 .keyboard__letter--correct {
-  @include letters--theme(#5d9b55, #f3f3f3, $box-shadow--light);
+  @include letters--theme($letter-bkg--correct-light, $letter-color--correct-light, $box-shadow--light);
 }
 
 //* dark-theme
 .keyboard--dark {
-  background-image: linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
-  background-image: -webkit-linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background-image: $keyboard-bkg--dark;
+  background-image: $-webkit-keyboard-bkg--dark;
   background-color: #ADA996;  // fallback for old browsers
 }
 
+.keyboard__letter--dark:focus-visible {
+  outline: $tab-outline--dark;
+}
+
 .keyboard__letter--dark {
-  @include letters--theme(#212121, whitesmoke, $box-shadow--dark);
+  @include letters--theme($letter-bkg--dark, $letter-color--dark, $box-shadow--dark);
 }
 
-.keyboard__letter--dark-missing {
-  @include letters--theme(#bdbdbd, #212121, $box-shadow--dark);
+.keyboard__letter--missing-dark {
+  @include letters--theme($letter-bkg--missing-dark, $letter-color--missing-dark, $box-shadow--dark);
 }
 
-.keyboard__letter--dark-close {
-  @include letters--theme(#b49c30, whitesmoke, $box-shadow--dark);
+.keyboard__letter--close-dark {
+  @include letters--theme($letter-bkg--close-dark, $letter-color--close-dark, $box-shadow--dark);
 }
 
-.keyboard__letter--dark-correct {
-  @include letters--theme(#5d9b55, whitesmoke, $box-shadow--dark);
+.keyboard__letter--correct-dark {
+  @include letters--theme($letter-bkg--correct-dark, $letter-color--correct-dark, $box-shadow--dark);
+}
+
+//* Dialogs
+dialog {
+  color: $dialog-color--light;
+  background-color: $dialog-bkg--light;
+  border: 2px solid $main-dark;
+  border-radius: 7px;
+}
+
+.dialog--dark {
+  color: $dialog-color--dark;
+  background-color: $dialog-bkg--dark;
+  border: 2px solid $main-light;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+.close-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.settings__row:first-child,
+.how-to-play__row:first-child {
+  background-image: $blue-gradient--light;
+  background-image: $-webkit-blue-gradient--light;
+  background-color: #1E88E5; // fallback for older browsers
+  @extend %header-bkg__text;
+}
+
+.row-separator {
+  background-color: $main-dark;
+}
+
+.row-separator--dark {
+  background-color: $main-light;
+}
+
+//* Theme
+.theme-switch {
+  background-color: #ffac45;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.theme-switch--dark {
+  background-color: #0093fa;
+}
+
+.switch__checkbox {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.switch-slider {
+  border-radius: 50%;
+  transition: transform 0.5s;
+  img:last-child {
+    opacity: 0;
+  }
+  background-color: $main-light;
+  padding: 10px;
+}
+
+.switch__checkbox:checked + .switch-slider {
+  img:first-child {
+    opacity: 0;
+  }
+  img:last-child {
+    opacity: 1;
+  }
+  transform: translateX(-25px);
+}
+
+//** how to play dialog
+
+//* light theme
+.fake-letter {
+  @include letters--theme(transparent, $letter-color--light, $box-shadow--light);
+  @extend %letters--light-border;
+  font-weight: 700;
+}
+
+.fake-letter--missing {
+  @include letters--theme($letter-bkg--missing-light, $letter-color--missing-light, $box-shadow--light);
+}
+
+.fake-letter--close {
+  @include letters--theme($letter-bkg--close-light, $letter-color--close-light, $box-shadow--light);
+}
+
+.fake-letter--correct {
+  @include letters--theme($letter-bkg--correct-light, $letter-color--correct-light, $box-shadow--light);
+}
+
+//* dark theme
+.fake-letter--dark {
+  @include letters--theme(transparent, $letter-color--dark, $box-shadow--dark);
+  @extend %letters--dark-border;
+}
+
+.fake-letter--missing-dark {
+  @include letters--theme($letter-bkg--missing-dark, $letter-color--missing-dark, $box-shadow--dark);
+  @extend %letters--dark-border;
+}
+
+.fake-letter--close-dark {
+  @include letters--theme($letter-bkg--close-dark, $letter-color--close-dark, $box-shadow--dark);
+  @extend %letters--dark-border;
+}
+
+.fake-letter--correct-dark {
+  @include letters--theme($letter-bkg--correct-dark, $letter-color--correct-dark, $box-shadow--dark);
+  @extend %letters--dark-border;
+}
+
+.info-subheader {
+  padding: 10px;
+}
+
+.subheader-text {
+  color: $main-light;
+  background-color: $main-dark;
+  border-radius: 10px;
+}
+
+.subheader-text--dark {
+  color: $main-dark;
+  background-color: $main-light;
 }
