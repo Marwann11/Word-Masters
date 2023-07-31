@@ -24,6 +24,10 @@ button:focus-visible {
   outline: 2px solid #349EEA;
 }
 
+::selection {
+  color: #1E88E5;
+}
+
 header {
   border-bottom: 5px solid transparent;
 }
@@ -82,6 +86,7 @@ header .header__title {
 header button {
   background-color: transparent;
   border: none;
+  user-select: none;
 }
 
 .header--dark {
@@ -102,6 +107,7 @@ header button {
   background-color: transparent;
   color: #212121;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  user-select: none;
 }
 
 .game-board__letter--missing {
@@ -129,7 +135,7 @@ header button {
 }
 
 .game-board__letter--missing-dark {
-  background-color: #4e4e4e;
+  background-color: #6b6b6b;
   color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
@@ -147,20 +153,21 @@ header button {
 }
 
 .keyboard {
-  background-image: linear-gradient(to top, #232526, #414345);
-  background-image: -webkit-linear-gradient(to top, #232526, #414345);
-  background-color: #414345;
+  background-image: linear-gradient(to top, #000, #484e55);
+  background-image: -webkit-linear-gradient(to top, #000, #484e55);
+  background-color: #7f8c8d;
   border-radius: 15px;
+}
+
+.keyboard__letter:focus-visible {
+  outline: 2px solid #349EEA;
 }
 
 .keyboard__letter {
   background-color: #f3f3f3;
   color: #212121;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.keyboard__letter:focus-visible {
-  outline: 2px solid #349EEA;
+  user-select: none;
 }
 
 .keyboard__letter--missing {
@@ -182,9 +189,9 @@ header button {
 }
 
 .keyboard--dark {
-  background-image: linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
-  background-image: -webkit-linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
-  background-color: #ADA996;
+  background-image: linear-gradient(to top, #d7e1ec, #ffffff);
+  background-image: -webkit-linear-gradient(to top, #d7e1ec, #ffffff);
+  background-color: #d7e1ec;
 }
 
 .keyboard__letter--dark:focus-visible {
@@ -198,7 +205,7 @@ header button {
 }
 
 .keyboard__letter--missing-dark {
-  background-color: #4e4e4e;
+  background-color: #6b6b6b;
   color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
@@ -236,6 +243,7 @@ dialog::backdrop {
   cursor: pointer;
   background-color: transparent;
   border: none;
+  user-select: none;
 }
 
 .settings__row:first-child,
@@ -289,6 +297,10 @@ dialog::backdrop {
   opacity: 1;
 }
 
+.fake-game-row {
+  user-select: none;
+}
+
 .fake-letter {
   background-color: transparent;
   color: #212121;
@@ -321,7 +333,7 @@ dialog::backdrop {
 }
 
 .fake-letter--missing-dark {
-  background-color: #4e4e4e;
+  background-color: #6b6b6b;
   color: #f3f3f3;
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
@@ -340,6 +352,7 @@ dialog::backdrop {
 
 .info-subheader {
   padding: 10px;
+  user-select: none;
 }
 
 .subheader-text {

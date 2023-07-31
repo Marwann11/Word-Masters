@@ -1,3 +1,9 @@
+"use strict";
+
+//****************************************************** */
+//* Main Functions
+//****************************************************** */
+
 /*
   * cell animation function takes for parameters:
   * rowCells => which is 1 cell or all cells (1 cell for adding and removing, all for validating)

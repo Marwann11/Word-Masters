@@ -1,3 +1,5 @@
+"use strict";
+
 import {cellAnimation} from './animations.mjs'
 
 /*
@@ -5,7 +7,7 @@ import {cellAnimation} from './animations.mjs'
 * eg. added a letter, removed a letter or (pressed enter (has no effect, just for consistency))
 */
 
-export function handleInput(rowCells, key) {
+function handleInput(rowCells, key) {
   // unify input
   key = key.toLowerCase();
   // check cases
@@ -61,3 +63,5 @@ const isLetter = (letter) => {
   const regex = /^[a-zA-Z]$/;
   return regex.test(letter);
 }
+
+export {handleInput}

@@ -1,4 +1,6 @@
-import {onKeyDown, onKeyUp} from "./helper.mjs"
+"use strict";
+
+import {addFunctionality, removeFunctionality} from "../helper.mjs"
 import {fakeValidationAnimation, dialogsEntryAnimation, dialogsExitAnimation} from "./animations.mjs"
 
 
@@ -61,8 +63,7 @@ function openDialog(dialogName) {
   }
 
   // remove user input event listeners to prevent interaction
-  document.body.removeEventListener("keydown", onKeyDown);
-  document.body.removeEventListener("keyup", onKeyUp);
+  removeFunctionality();
 
   // add an event listener on page for the ESC key and outside the modal box clicks
   document.addEventListener("keydown", handleEscKeyClick(dialogName));
@@ -96,8 +97,7 @@ function closeDialog(dialogName) {
   document.removeEventListener("click", handleOutsideDialogClick(dialogName));
   
   // add user input event listeners to regain interactivity
-  document.body.addEventListener("keydown", onKeyDown);
-  document.body.addEventListener("keyup", onKeyUp);
+  addFunctionality();
 }
 
 /*
@@ -124,9 +124,9 @@ function handleOutsideDialogClick(dialogName) {
     }
   }
 }
-/****************************
+/*********************************
   ** Settings dialog Functions
-****************************/
+*********************************/
 
 function handleSettingsButton() {
   const settingsBtn = document.querySelector(".settings-btn");
@@ -168,10 +168,6 @@ function initialDarkModeCheck() {
     checkbox.click();
   }
 }
-
-// do an initial check
-initialDarkModeCheck();
-
 
 /*
   * main function for the dark mode button
@@ -410,4 +406,4 @@ function closeHowToPlayEvent() {
   closeDialog("howToPlay");
 }
 
-export {handleSettingsButton, handleThemeButton, handleHowToPlayButton};
+export {handleSettingsButton, handleThemeButton, handleHowToPlayButton, initialDarkModeCheck};

@@ -24,12 +24,12 @@ $-webkit-blue-gradient--dark: -webkit-linear-gradient(120deg, #50abfc, #83c6fd);
 
 //*** keyboard
 //**** light theme
-$keyboard-bkg--light: linear-gradient(to top, #232526, #414345);
-$-webkit-keyboard-bkg--light: -webkit-linear-gradient(to top, #232526, #414345);
+$keyboard-bkg--light: linear-gradient(to top, #000, #484e55);
+$-webkit-keyboard-bkg--light: -webkit-linear-gradient(to top, #000, #484e55);
 
 //**** dark theme
-$keyboard-bkg--dark: linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
-$-webkit-keyboard-bkg--dark: -webkit-linear-gradient(to top, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+$keyboard-bkg--dark: linear-gradient(to top, #d7e1ec, #ffffff);
+$-webkit-keyboard-bkg--dark: -webkit-linear-gradient(to top, #d7e1ec, #ffffff);
 
 //*** letters colors
 //**** light-theme
@@ -52,7 +52,7 @@ $letter-color--dark: $main-light;
 $letter-bkg--dark: $main-dark;
 // missing cells-keyboard
 $letter-color--missing-dark: $main-light;
-$letter-bkg--missing-dark: #4e4e4e;
+$letter-bkg--missing-dark: #6b6b6b;
 // close cells-keyboard
 $letter-color--close-dark: $main-light;
 $letter-bkg--close-dark: $letter-bkg--close-light;

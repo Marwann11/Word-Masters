@@ -19,30 +19,55 @@ button {
 //* header
 header {
   display: grid;
-  grid-template-columns: 0.15fr 1fr 0.15fr;
+  // at smaller screens adjust the layout
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr 150px;
+    column-gap: 10px;
+    grid-template-areas:
+    "title settings";
+    .header__title {
+      justify-content: flex-start;
+    }
+    .controls-container {
+      button {
+        width: 35px;
+        height: 35px;
+        img {
+          width: 25px;
+          height: 20px;
+        }
+      }
+    }
+  }
+  grid-template-columns: 180px 1fr 180px;
   grid-template-areas: 
     ". title settings";
-  margin-bottom: 20px;
-  .header__title {
-    grid-area: title;
-    @extend %flex-object--centered;
-  }
-  .controls-container {
-    grid-area: settings;
-    @extend %flex-object--centered;
-    justify-content: space-evenly;
-    width: 150px;
-    button {
-      border: none;
+    margin-bottom: 20px;
+    .header__title {
+      grid-area: title;
+      @extend %flex-object--centered;
+      padding-inline: 15px;
     }
+    .controls-container {
+      grid-area: settings;
+      @extend %flex-object--centered;
+      justify-content: space-evenly;
+      width: 150px;
+      button {
+        border: none;
+      }
+
   }
 }
 
 //* feedback
 .feedback-container {
   @extend %flex-object--centered;
-  flex-direction: column;
-  margin-bottom: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  @media (max-width: 450px) {
+    margin-bottom: 40px;
+  }
 }
 
 .feedback-message {
@@ -50,7 +75,7 @@ header {
   width: fit-content;
   max-width: 90vw;
   padding-inline: 20px;
-  padding-block: 7px;
+  padding-block: 10px;
   z-index: 1;
 }
 
@@ -198,8 +223,12 @@ dialog {
   width: clamp(300px, 90vw, 700px);
   height: clamp(380px, 60vh, 850px);
   .close-button {
-    top: -20px;
-    right: -15px;
+    top: -10px;
+    right: 0;
+    @media (max-width: 380px) {
+      top: -15px;
+      right: -15px;
+    }
   }
   .how-to-play__wrapper {
     display: grid;

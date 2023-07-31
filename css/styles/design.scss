@@ -21,6 +21,11 @@ button:focus-visible {
   outline: $tab-outline--light;
 }
 
+::selection {
+  color: #1E88E5;
+}
+
+
 //* header components
 %header-border {
   border-bottom: 5px solid transparent;
@@ -93,6 +98,7 @@ header {
   button {
     background-color: transparent;
     border: none;
+    user-select: none;
   }
 }
 
@@ -113,6 +119,7 @@ header {
 .game-board__letter {
   @include letters--theme(transparent, $letter-color--light, $box-shadow--light);
   @extend %letters--light-border;
+  user-select: none;
 }
 
 .game-board__letter--missing {
@@ -153,17 +160,18 @@ header {
 .keyboard {
   background-image: $keyboard-bkg--light;
   background-image: $-webkit-keyboard-bkg--light;
-  background-color: #414345; // fallback for old browsers
+  background-color: #7f8c8d; // fallback for old browsers
   border-radius: 15px;
+}
+
+.keyboard__letter:focus-visible {
+  outline: $tab-outline--light;
 }
 
 .keyboard__letter {
   @include letters--theme($letter-bkg--light, $letter-color--light, $box-shadow--light);
   @extend %keyboard-letter--properties;
-}
-
-.keyboard__letter:focus-visible {
-  outline: $tab-outline--light;
+  user-select: none;
 }
 
 .keyboard__letter--missing {
@@ -182,7 +190,7 @@ header {
 .keyboard--dark {
   background-image: $keyboard-bkg--dark;
   background-image: $-webkit-keyboard-bkg--dark;
-  background-color: #ADA996;  // fallback for old browsers
+  background-color: #d7e1ec; // fallback for old browsers
 }
 
 .keyboard__letter--dark:focus-visible {
@@ -227,6 +235,7 @@ dialog::backdrop {
   cursor: pointer;
   background-color: transparent;
   border: none;
+  user-select: none;
 }
 
 .settings__row:first-child,
@@ -284,6 +293,10 @@ dialog::backdrop {
 
 //** how to play dialog
 
+.fake-game-row {
+  user-select: none;
+}
+
 //* light theme
 .fake-letter {
   @include letters--theme(transparent, $letter-color--light, $box-shadow--light);
@@ -326,6 +339,7 @@ dialog::backdrop {
 
 .info-subheader {
   padding: 10px;
+  user-select: none;
 }
 
 .subheader-text {

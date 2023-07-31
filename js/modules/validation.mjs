@@ -1,4 +1,8 @@
+"use strict";
+
+import {removeFunctionality} from "../helper.mjs"
 import { cellAnimation } from "./animations.mjs";
+import {userProgress, saveGameState} from "./userProgress.mjs";
 
 //********************* */
 //* Global Variables
@@ -6,34 +10,78 @@ import { cellAnimation } from "./animations.mjs";
 
 // track on screen feedback
 let feedbackOnScreen = false;
-// track user progress
-export const userProgress = {
-  currentRow: 0,
-  isSolved: false
-}
 
-//************************************* */
+//****************************************************** */
+//* Main Functions
+//****************************************************** */
 
-async function fetchWordOfTheDay() {
-  const promise = fetch("https://words.dev-apis.com/word-of-the-day");
-
-  return promise
-    .then((response) => response.json())
-    .then((responseObject) => responseObject.word)
-    .catch(() => {
-      feedbackMessage(`Server error 😐`, false);
-    })
-}
-
-function feedbackMessage(message, stayOnScreen) {
+/*
+  * Function to display feedback messages on screen
+  * message => the message displayed in the feedback element
+  * stayOnScreen => boolean indicating whether the feedback will stay on screen or not
+  * timeOnScreen => only needed if stayOnScreen is false, to represent the time on screen in seconds before removal
+*/
+function feedbackMessage(message, stayOnScreen, timeOnScreen) {
   const feedbackElement = document.querySelector(".feedback-message");
   feedbackElement.innerHTML = `${message}`;
   if (!feedbackOnScreen) {
-    displayFeedback(feedbackElement, stayOnScreen);
+    displayFeedback(feedbackElement, stayOnScreen, timeOnScreen);
   }
 }
 
-function displayFeedback(elem, stayOnScreen) {
+//* Function to deliberately remove persistent feedback messages
+function removeFeedbackMessage() {
+  const feedbackElement = document.querySelector(".feedback-message");
+  feedbackElement.classList.remove("fade-in-feedback");
+  feedbackElement.classList.add("fade-out-feedback");
+
+  setTimeout(() => {
+    feedbackElement.classList.remove("fade-out-feedback");
+    feedbackOnScreen = false;
+  }, 500)
+}
+
+async function completeValidationCheck(rowCells, keyboardBtns, wordOfTheDay) {
+  feedbackMessage("Processing...", true);
+  // check for row completeness
+  let rowComplete = rowCheck(rowCells);
+  if (rowComplete) {
+    // get user input and handle validation and animation
+    const userInput = assembleWord(rowCells);
+    const similarLetters = await handleValidation(wordOfTheDay, userInput, rowCells, keyboardBtns);
+
+    removeFeedbackMessage()
+    if (similarLetters === false) {
+      // do invalid word animation
+      cellAnimation(rowCells, "enter");
+    } else {
+      // Animate changes to row cells and keyboard buttons based on their similarity
+      cellAnimation(rowCells, "enter", similarLetters, keyboardBtns);
+      // Mark row as completed
+      document.querySelectorAll(".game-board__row")[userProgress.currentRow].dataset.state = "DONE";
+      // save current game state after animations durations has completed
+      setTimeout(() => {
+        saveGameState(rowCells);
+      }, 1200);
+    }
+    // check if game ended
+    if (similarLetters !== false) {
+      endGameCheck();
+    }
+  }
+}
+
+//****************************************************** */
+//* Helper Functions
+//****************************************************** */
+
+/*
+  * function that displays feedback on the screen
+  * elem => takes the feedback element as a first argument
+  * stayOnScreen => boolean indicating whether the feedback will stay on screen or not
+  * timeInSeconds => elapsed time for each feedback message
+*/ 
+function displayFeedback(elem, stayOnScreen, timeInSeconds) {
   // add entry animation
   elem.classList.add("fade-in-feedback");
 
@@ -45,21 +93,21 @@ function displayFeedback(elem, stayOnScreen) {
     setTimeout(() => {
       elem.classList.remove("fade-in-feedback");
       elem.classList.add("fade-out-feedback");
-    }, 2500)
+    }, timeInSeconds * 1000)
     setTimeout(() => {
       elem.classList.remove("fade-out-feedback");
       feedbackOnScreen = false;
-    }, 3000)
+    }, (timeInSeconds * 1000) + 500)
   }
 }
 
-//* Row check for completion
+//* Function that checks if row cells are complete
 function rowCheck(rowCells) {
   let rowComplete = false;
   for (let i = 0; i < rowCells.length; i++) {
     if (rowCells[i].innerText === "") {
       // Give feedback to the user
-      feedbackMessage("NOT ENOUGH LETTERS", false);
+      feedbackMessage("NOT ENOUGH LETTERS", false, 1);
       // do rejection animation
       cellAnimation(rowCells, "enter");
       rowComplete = false;
@@ -80,38 +128,81 @@ function assembleWord(rowCells) {
   return string;
 }
 
-//* Check word validity
-async function isWord(word) {
-  // Post to validation API
-  const request = await fetch("https://words.dev-apis.com/validate-word", {
-    method: "POST",
-    body: JSON.stringify({
-      "word": `${word}`,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-      "Connection": "keep-alive",
+/*
+  * handleValidation returns:
+  * false => in case of invalid user input
+  * Array that represents similarity between userInput and word of the day
+  * based on index of characters => in case of a valid user input
+*/
+async function handleValidation(wordOfTheDay, userInput) {
+  // if there is no word of the day (i.e Fetch Failed)
+  if (wordOfTheDay === undefined) return false;
+  // Get similar letters between user input and word of the day
+  const similarLetters = await compareWords(wordOfTheDay, userInput);
+
+  // if user input is invalid
+  if (similarLetters === false) {
+    return false;
+  } else {
+    // check if word is solved
+    for (let letter of similarLetters) {
+      if (letter === true) {
+        userProgress.isSolved = true;
+      } else {
+        userProgress.isSolved = false;
+        break;
+      }
     }
-  }).catch(() => {
-    feedbackMessage("Server error: Check Again Later 😞", false);
-  });
 
-  if (request === undefined) { // API error
-    return;
+    if (userProgress.isSolved) {
+      const winFeedbackTime = 2.5;
+      switch (userProgress.currentRow) {
+        case 0:
+          feedbackMessage("Exceptional", false, winFeedbackTime);
+          break;
+        case 1:
+          feedbackMessage("Incredible", false, winFeedbackTime);
+          break;
+        case 2:
+          feedbackMessage("Impressive", false, winFeedbackTime);
+          break;
+        case 3:
+          feedbackMessage("Great", false, winFeedbackTime);
+          break;
+        case 4:
+          feedbackMessage("Nice", false, winFeedbackTime);
+          break;
+        default:
+          feedbackMessage("Phew", false, winFeedbackTime);
+      }
+    } else {
+      if (userProgress.currentRow === 5) {
+        feedbackMessage(`Correct word: ${wordOfTheDay.toUpperCase()}`, true);
+      }
+    }
+    // return similarLetters
+    return similarLetters;
   }
-
-  // Get Response Object
-  const responseObject = await request.json();
-  return responseObject.validWord;
 }
 
-async function checkWord(wordOfTheDay, userInput) {
+/*
+  * This function compares both words (word of the day - user input) for similarity
+  * returns false and displays feedback => if user input is an invalid english word
+  * returns false => if the isWord function returns undefined
+  * returns false => if the words are not equal in length or the word of the day has any invalid characters
+  * returns a mixed array of booleans and strings => in case of a valid check
+  * with the three values:
+    ** true => for characters available in both words at the same position
+    ** "close" => for characters available in both words at different positions
+    ** false => for characters missing from one word compared to the other
+*/
+async function compareWords(wordOfTheDay, userInput) {
   // check if user input is a valid word
   const validWord = await isWord(userInput);
 
   // if invalid word
   if (validWord === false) {
-    feedbackMessage("Not in word list", false);
+    feedbackMessage("Not in word list", false, 1);
     return false;
   } else if (validWord === undefined) {
     return false;
@@ -235,60 +326,51 @@ function handleRemainingDifferences(differencesMap, similarLetters) {
 }
 
 /*
-  * handleValidation returns:
-  * false => in case of invalid user input
-  * Array that represents similarity between userInput and word of the day
-  * based on index of characters => in case of a valid user input
+  * This function check if the user input is a valid word
+  * returns undefined => if there is no internet or on API server errors
+  * returns true => in case of a valid word
+  * returns false => in case of an invalid word
+*/
+async function isWord(word) {
+  // Post to validation API
+  const request = await fetch("https://words.dev-apis.com/validate-word", {
+    method: "POST",
+    body: JSON.stringify({
+      "word": `${word}`,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+      "Connection": "keep-alive",
+    }
+  }).catch(() => {
+    feedbackMessage("Server Error, please check your internet connection 😞", false, 3);
+  });
+
+  if (request === undefined) { // API error
+    return undefined;
+  }
+
+  // Get Response Object
+  const responseObject = await request.json();
+  return responseObject.validWord;
+}
+
+/*
+  *  Function to check if the word has been solved
+    ** removes functionality => if word has been solved
+    ** switches to next row => if current row is not last row
 */
 
-async function handleValidation(wordOfTheDay, userInput) {
-  // if there is no word of the day (i.e Fetch Failed)
-  if (wordOfTheDay === undefined) return false;
-  // Get similar letters between user input and word of the day
-  const similarLetters = await checkWord(wordOfTheDay, userInput);
-
-  // if user input is invalid
-  if (similarLetters === false) {
-    return false;
-  } else {
-    // check if word is solved
-    for (let letter of similarLetters) {
-      if (letter === true) {
-        userProgress.isSolved = true;
-      } else {
-        userProgress.isSolved = false;
-        break;
-      }
-    }
-
-    if (userProgress.isSolved) {
-      switch (userProgress.currentRow) {
-        case 0:
-          feedbackMessage("Exceptional", false);
-          break;
-        case 1:
-          feedbackMessage("Incredible", false);
-          break;
-        case 2:
-          feedbackMessage("Impressive", false);
-          break;
-        case 3:
-          feedbackMessage("Great", false);
-          break;
-        case 4:
-          feedbackMessage("Nice", false);
-          break;
-        default:
-          feedbackMessage("Phew", false);
-      }
-    } else {
-      if (userProgress.currentRow === 5) {
-        feedbackMessage(`Correct word: ${wordOfTheDay.toUpperCase()}`, true);
-      }
-    }
-    // return similarLetters
-    return similarLetters;
+function endGameCheck() {
+  // update the row
+  if (userProgress.isSolved) {
+    removeFunctionality();
+  } else if (userProgress.currentRow < 6) {
+    // increment to next row after animations durations has completed
+    setTimeout(() => {
+      userProgress.currentRow++;
+    }, 1200);
   }
 }
 
-export { fetchWordOfTheDay, rowCheck, assembleWord, handleValidation };
+export {completeValidationCheck, feedbackMessage};

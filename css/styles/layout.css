@@ -21,12 +21,31 @@ button img {
 
 header {
   display: grid;
-  grid-template-columns: 0.15fr 1fr 0.15fr;
+  grid-template-columns: 180px 1fr 180px;
   grid-template-areas: ". title settings";
   margin-bottom: 20px;
 }
+@media (max-width: 700px) {
+  header {
+    grid-template-columns: 1fr 150px;
+    column-gap: 10px;
+    grid-template-areas: "title settings";
+  }
+  header .header__title {
+    justify-content: flex-start;
+  }
+  header .controls-container button {
+    width: 35px;
+    height: 35px;
+  }
+  header .controls-container button img {
+    width: 25px;
+    height: 20px;
+  }
+}
 header .header__title {
   grid-area: title;
+  padding-inline: 15px;
 }
 header .controls-container {
   grid-area: settings;
@@ -38,15 +57,20 @@ header .controls-container button {
 }
 
 .feedback-container {
-  flex-direction: column;
-  margin-bottom: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+@media (max-width: 450px) {
+  .feedback-container {
+    margin-bottom: 40px;
+  }
 }
 
 .feedback-message {
   width: fit-content;
   max-width: 90vw;
   padding-inline: 20px;
-  padding-block: 7px;
+  padding-block: 10px;
   z-index: 1;
 }
 
@@ -188,8 +212,14 @@ dialog {
   height: clamp(380px, 60vh, 850px);
 }
 .how-to-play-dialog .close-button {
-  top: -20px;
-  right: -15px;
+  top: -10px;
+  right: 0;
+}
+@media (max-width: 380px) {
+  .how-to-play-dialog .close-button {
+    top: -15px;
+    right: -15px;
+  }
 }
 .how-to-play-dialog .how-to-play__wrapper {
   display: grid;

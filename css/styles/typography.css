@@ -7,7 +7,7 @@ body {
 }
 
 header .header__title {
-  font-size: clamp(1.5rem, 2.5vmin, 2.25rem);
+  font-size: clamp(1rem, 2.5vmax, 1.75rem);
   font-weight: 800;
   font-variation-settings: "wdth" 87.5;
 }
