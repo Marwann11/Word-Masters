@@ -90,14 +90,15 @@ header {
   border-color: #1E88E5; // fallback for older browsers
   @extend %header-border; 
   .header__title {
-    background-image: $blue-gradient--light;
     background-image: $-webkit-blue-gradient--light;
+    background-image: $blue-gradient--light;
     background-color: #1E88E5; // fallback for older browsers
     @extend %header-bkg__text;
   }
   button {
     background-color: transparent;
     border: none;
+    -webkit-user-select: none;
     user-select: none;
   }
 }
@@ -108,8 +109,8 @@ header {
   }
   border-color: #46a4f7; // fallback for older browsers
   .header__title--dark {
-    background-image: $blue-gradient--dark;
     background-image: $-webkit-blue-gradient--dark;
+    background-image: $blue-gradient--dark;
     background-color: #8ecafc; // fallback for older browsers
   }
 }
@@ -119,6 +120,7 @@ header {
 .game-board__letter {
   @include letters--theme(transparent, $letter-color--light, $box-shadow--light);
   @extend %letters--light-border;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -158,8 +160,8 @@ header {
 //* keyboard
 //** light-theme
 .keyboard {
-  background-image: $keyboard-bkg--light;
   background-image: $-webkit-keyboard-bkg--light;
+  background-image: $keyboard-bkg--light;
   background-color: #7f8c8d; // fallback for old browsers
   border-radius: 15px;
 }
@@ -171,6 +173,7 @@ header {
 .keyboard__letter {
   @include letters--theme($letter-bkg--light, $letter-color--light, $box-shadow--light);
   @extend %keyboard-letter--properties;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -188,8 +191,8 @@ header {
 
 //* dark-theme
 .keyboard--dark {
-  background-image: $keyboard-bkg--dark;
   background-image: $-webkit-keyboard-bkg--dark;
+  background-image: $keyboard-bkg--dark;
   background-color: #d7e1ec; // fallback for old browsers
 }
 
@@ -228,6 +231,7 @@ dialog {
 }
 
 dialog::backdrop {
+  -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
 
@@ -235,6 +239,7 @@ dialog::backdrop {
   cursor: pointer;
   background-color: transparent;
   border: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -294,6 +299,7 @@ dialog::backdrop {
 //** how to play dialog
 
 .fake-game-row {
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -337,8 +343,22 @@ dialog::backdrop {
   @extend %letters--dark-border;
 }
 
+.how-to-play__headings {
+  color: $main-light;
+  background-color: $main-dark;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.how-to-play__headings--dark {
+  color: $main-dark;
+  background-color: $main-light;
+}
+
 .info-subheader {
-  padding: 10px;
+  padding: 15px;
+  border-radius: 25px;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -349,6 +369,27 @@ dialog::backdrop {
 }
 
 .subheader-text--dark {
+  color: $main-dark;
+  background-color: $main-light;
+}
+
+.centering-container {
+  @extend %flex-object--centered;
+}
+
+.how-to-play__list {
+  color: $main-light;
+  background-color: $main-dark;
+  padding-block: 10px;
+  padding-inline: 40px;
+  border-radius: 20px;
+  list-style-type: circle;
+  li:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+}
+
+.how-to-play__list--dark {
   color: $main-dark;
   background-color: $main-light;
 }

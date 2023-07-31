@@ -1,5 +1,3 @@
-"use strict";
-
 import { feedbackMessage } from './validation.mjs';
 import { getTodayWord, isDayPassed } from "./wordOfTheDay.mjs";
 

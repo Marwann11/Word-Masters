@@ -67,6 +67,7 @@ header .controls-container button {
 }
 
 .feedback-message {
+  width: -moz-fit-content;
   width: fit-content;
   max-width: 90vw;
   padding-inline: 20px;
@@ -125,6 +126,7 @@ header .controls-container button {
   column-gap: 5px;
 }
 .keyboard .keyboard__row .keyboard__letter {
+  width: -moz-fit-content;
   width: fit-content;
   padding-inline: 10px;
   padding-block: 12px;
@@ -138,7 +140,7 @@ header .controls-container button {
 
 dialog {
   width: clamp(300px, 70vw, 600px);
-  height: clamp(380px, 50vh, 750px);
+  height: clamp(300px, 40vh, 750px);
 }
 
 dialog {
@@ -158,7 +160,7 @@ dialog {
 
 .settings-wrapper {
   display: grid;
-  grid-template-rows: 50px repeat(4, 1fr);
+  grid-template-rows: 50px auto auto;
   height: 100%;
   width: 100%;
 }
@@ -264,6 +266,11 @@ dialog {
   margin-inline: 2px;
 }
 
+.how-to-play__headings {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .column-row {
   flex-direction: column;
   align-items: center;
@@ -271,8 +278,8 @@ dialog {
 
 .info-subheader {
   display: inline-flex;
-  width: fit-content;
   width: -moz-fit-content;
+  width: fit-content;
 }
 
 /*# sourceMappingURL=layout.css.map */

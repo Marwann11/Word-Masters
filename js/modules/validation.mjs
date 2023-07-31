@@ -1,5 +1,3 @@
-"use strict";
-
 import {removeFunctionality} from "../helper.mjs"
 import { cellAnimation } from "./animations.mjs";
 import {userProgress, saveGameState} from "./userProgress.mjs";
@@ -29,20 +27,16 @@ function feedbackMessage(message, stayOnScreen, timeOnScreen) {
   }
 }
 
-//* Function to deliberately remove persistent feedback messages
-function removeFeedbackMessage() {
-  const feedbackElement = document.querySelector(".feedback-message");
-  feedbackElement.classList.remove("fade-in-feedback");
-  feedbackElement.classList.add("fade-out-feedback");
-
-  setTimeout(() => {
-    feedbackElement.classList.remove("fade-out-feedback");
-    feedbackOnScreen = false;
-  }, 500)
-}
-
+/*
+  * the main Function to handle the full process of validating
+    ** Checks if row is complete
+    ** assembles the word if complete, otherwise does the corresponding animation
+    ** handleValidation => returns false => if word is invalid or on server error
+    ** => returns an array of boolean and string values indicating similarity between the two words
+    ** handle related animations based on handleValidation return value
+    ** in case of a successful validation check, Save game state and check if it's "game over"
+*/
 async function completeValidationCheck(rowCells, keyboardBtns, wordOfTheDay) {
-  feedbackMessage("Processing...", true);
   // check for row completeness
   let rowComplete = rowCheck(rowCells);
   if (rowComplete) {
@@ -50,7 +44,6 @@ async function completeValidationCheck(rowCells, keyboardBtns, wordOfTheDay) {
     const userInput = assembleWord(rowCells);
     const similarLetters = await handleValidation(wordOfTheDay, userInput, rowCells, keyboardBtns);
 
-    removeFeedbackMessage()
     if (similarLetters === false) {
       // do invalid word animation
       cellAnimation(rowCells, "enter");
@@ -85,7 +78,6 @@ function displayFeedback(elem, stayOnScreen, timeInSeconds) {
   // add entry animation
   elem.classList.add("fade-in-feedback");
 
-  // if (darkMode) elem.classList.add("feedback-message--dark");
   feedbackOnScreen = true;
 
   if (!stayOnScreen) {
@@ -107,7 +99,7 @@ function rowCheck(rowCells) {
   for (let i = 0; i < rowCells.length; i++) {
     if (rowCells[i].innerText === "") {
       // Give feedback to the user
-      feedbackMessage("NOT ENOUGH LETTERS", false, 1);
+      feedbackMessage("Not Enough Letters", false, 1);
       // do rejection animation
       cellAnimation(rowCells, "enter");
       rowComplete = false;
@@ -202,7 +194,7 @@ async function compareWords(wordOfTheDay, userInput) {
 
   // if invalid word
   if (validWord === false) {
-    feedbackMessage("Not in word list", false, 1);
+    feedbackMessage("Not In Word List", false, 1.5);
     return false;
   } else if (validWord === undefined) {
     return false;
@@ -210,7 +202,7 @@ async function compareWords(wordOfTheDay, userInput) {
 
   // validate input
   if (/\d/.test(wordOfTheDay) || (wordOfTheDay.length !== userInput.length)) {
-    feedbackMessage("Server Error, enjoy a cookie while we work on it 😙", true);
+    feedbackMessage("Server Error, Enjoy a cookie while we work on it 😙", true);
     return false;
   }
 

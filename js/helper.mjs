@@ -1,5 +1,3 @@
-"use strict";
-
 import { wordOfTheDay } from './main.mjs';
 import { handleInput } from './modules/input.mjs';
 import { cellAnimation, keyboardAnimation, removeKeyboardAnimations } from './modules/animations.mjs';

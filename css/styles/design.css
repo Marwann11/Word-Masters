@@ -1,4 +1,4 @@
-.keyboard__letter {
+.centering-container, .keyboard__letter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,13 +79,14 @@ header {
   }
 }
 header .header__title {
-  background-image: linear-gradient(120deg, #1E88E5, #64B5F6);
   background-image: -webkit-linear-gradient(120deg, #1E88E5, #64B5F6);
+  background-image: linear-gradient(120deg, #1E88E5, #64B5F6);
   background-color: #1E88E5;
 }
 header button {
   background-color: transparent;
   border: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -98,8 +99,8 @@ header button {
   }
 }
 .header--dark .header__title--dark {
-  background-image: linear-gradient(120deg, #50abfc, #83c6fd);
   background-image: -webkit-linear-gradient(120deg, #50abfc, #83c6fd);
+  background-image: linear-gradient(120deg, #50abfc, #83c6fd);
   background-color: #8ecafc;
 }
 
@@ -107,6 +108,7 @@ header button {
   background-color: transparent;
   color: #212121;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -153,8 +155,8 @@ header button {
 }
 
 .keyboard {
-  background-image: linear-gradient(to top, #000, #484e55);
   background-image: -webkit-linear-gradient(to top, #000, #484e55);
+  background-image: linear-gradient(to top, #000, #484e55);
   background-color: #7f8c8d;
   border-radius: 15px;
 }
@@ -167,6 +169,7 @@ header button {
   background-color: #f3f3f3;
   color: #212121;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -189,8 +192,8 @@ header button {
 }
 
 .keyboard--dark {
-  background-image: linear-gradient(to top, #d7e1ec, #ffffff);
   background-image: -webkit-linear-gradient(to top, #d7e1ec, #ffffff);
+  background-image: linear-gradient(to top, #d7e1ec, #ffffff);
   background-color: #d7e1ec;
 }
 
@@ -236,6 +239,7 @@ dialog {
 }
 
 dialog::backdrop {
+  -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
 
@@ -243,6 +247,7 @@ dialog::backdrop {
   cursor: pointer;
   background-color: transparent;
   border: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -298,6 +303,7 @@ dialog::backdrop {
 }
 
 .fake-game-row {
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -350,8 +356,22 @@ dialog::backdrop {
   box-shadow: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
 }
 
+.how-to-play__headings {
+  color: #f3f3f3;
+  background-color: #212121;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.how-to-play__headings--dark {
+  color: #212121;
+  background-color: #f3f3f3;
+}
+
 .info-subheader {
-  padding: 10px;
+  padding: 15px;
+  border-radius: 25px;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -362,6 +382,23 @@ dialog::backdrop {
 }
 
 .subheader-text--dark {
+  color: #212121;
+  background-color: #f3f3f3;
+}
+
+.how-to-play__list {
+  color: #f3f3f3;
+  background-color: #212121;
+  padding-block: 10px;
+  padding-inline: 40px;
+  border-radius: 20px;
+  list-style-type: circle;
+}
+.how-to-play__list li:not(:last-of-type) {
+  margin-bottom: 10px;
+}
+
+.how-to-play__list--dark {
   color: #212121;
   background-color: #f3f3f3;
 }

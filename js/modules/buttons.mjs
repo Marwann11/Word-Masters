@@ -1,5 +1,3 @@
-"use strict";
-
 import {addFunctionality, removeFunctionality} from "../helper.mjs"
 import {fakeValidationAnimation, dialogsEntryAnimation, dialogsExitAnimation} from "./animations.mjs"
 
@@ -33,7 +31,7 @@ const singleHyphenElements = [
 
 const doubleHyphenElements = [
   "game-board__letter", "keyboard__letter", "row-separator", "fake-letter",
-  "subheader-text"
+  "subheader-text", "how-to-play__headings", "how-to-play__list"
 ];
 
 
@@ -158,7 +156,8 @@ function detectPreferredColorScheme() {
 // initial check to know if a switch to dark theme is needed based on user preference
 function initialDarkModeCheck() {
   if (userPreference === "dark") {
-    // change data-theme attribute to dark mode
+    // change aria-checked and data-theme attribute to dark mode
+    checkbox.setAttribute("aria-checked", "true");
     checkbox.setAttribute("data-theme", "dark");
     // switch to dark theme
     handleThemeChange();

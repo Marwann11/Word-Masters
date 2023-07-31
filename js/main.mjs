@@ -1,5 +1,3 @@
-"use strict";
-
 import { previousGameState, applyPreviousGameState } from "./modules/userProgress.mjs";
 import { initialDarkModeCheck } from "./modules/buttons.mjs";
 import { getTodayWord } from './modules/wordOfTheDay.mjs';
