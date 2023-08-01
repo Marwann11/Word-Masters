@@ -5,8 +5,6 @@
 
 @import 'styles/variables';
 
-/* General Styling */
-
 * {
   box-sizing: border-box;
 }
@@ -15,4 +13,10 @@ body {
   margin: 0;
   padding: 0px;
   cursor: default;
+}
+
+//* fonts
+@font-face {
+  font-family: "martian-mono";
+  src: url(styles/fonts/martian-mono/MartianMono-VariableFont_wdth\,wght.ttf) format("truetype");
 }

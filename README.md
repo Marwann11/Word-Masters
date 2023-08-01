@@ -25,4 +25,4 @@ _Feel free to explore the project and have fun guessing words_ 💙
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](license.txt) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.

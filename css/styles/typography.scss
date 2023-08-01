@@ -1,12 +1,5 @@
 @import 'variables';
 
-//* fonts
-@font-face {
-  font-family: "martian-mono";
-  src: url(fonts/martian-mono/MartianMono-VariableFont_wdth\,wght.ttf) format("truetype");
-}
-// *****
-
 body {
   font-family: "martian-mono", $fallback-fonts;
 }
