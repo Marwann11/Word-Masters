@@ -1,16 +1,3 @@
-@import url(styles/layout.css);
-@import url(styles/typography.css);
-@import url(styles/design.css);
-@import url(styles/animations.css);
-/* General Styling */
-* {
-  box-sizing: border-box;
-}
+@import url(styles/layout.css);@import url(styles/typography.css);@import url(styles/design.css);@import url(styles/animations.css);*{box-sizing:border-box}body{margin:0;padding:0px;cursor:default}
 
-body {
-  margin: 0;
-  padding: 0px;
-  cursor: default;
-}
-
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDhCQUE4QixDQUFDLGtDQUFrQyxDQUFDLDhCQUE4QixDQUFDLGtDQUFrQyxDQUFDLEVBQUUscUJBQXFCLENBQUMsS0FBSyxRQUFRLENBQUMsV0FBVyxDQUFDLGNBQWMiLCJmaWxlIjoibWFpbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IHVybChzdHlsZXMvbGF5b3V0LmNzcyk7QGltcG9ydCB1cmwoc3R5bGVzL3R5cG9ncmFwaHkuY3NzKTtAaW1wb3J0IHVybChzdHlsZXMvZGVzaWduLmNzcyk7QGltcG9ydCB1cmwoc3R5bGVzL2FuaW1hdGlvbnMuY3NzKTsqe2JveC1zaXppbmc6Ym9yZGVyLWJveH1ib2R5e21hcmdpbjowO3BhZGRpbmc6MHB4O2N1cnNvcjpkZWZhdWx0fVxuIl19 */

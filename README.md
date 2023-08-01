@@ -22,3 +22,7 @@ In this Project, I have created a *guessing word game*, which is a client-side w
 - **API**: The project relies on an API provided by Frontend Masters website For **_word of the day selection_** and **_word validation_**
 
 _Feel free to explore the project and have fun guessing words_ 💙
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](license.txt) file for details.
