@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/main.css">
   <script type="module" src="js/main.mjs"></script>
   <!--* Support for older browsers  *-->
-  <script type="nomodule" src="js/main.mjs"></script>
+  <script nomodule src="js/main.mjs"></script>
   <!--******-->
   <meta name="author" content="Marwan Ghanem">
   <meta name="description"
@@ -140,8 +140,8 @@
         <div class="theme-label">
           Dark Mode
         </div>
-        <label class="theme-switch" role="button" aria-label="dark mode button">
-          <input type="checkbox" tabindex="0" class="switch__checkbox" data-theme="light" aria-checked="false">
+        <label class="theme-switch" aria-label="dark mode button">
+          <input type="checkbox" tabindex="0" class="switch__checkbox" data-theme="light">
           <span class="switch-slider">
             <img src="css/images/theme/dark-mode-button/sun.svg" alt="dark mode off">
             <img src="css/images/theme/dark-mode-button/moon.svg" alt="dark mode on">

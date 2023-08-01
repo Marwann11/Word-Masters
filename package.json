@@ -1,0 +1,32 @@
+{
+  "name": "word_masters",
+  "version": "1.0.0",
+  "description": "In this Project, I have created a *guessing word game*, which is a client-side web application based on the famous game _Wordle_.",
+  "main": "./js/main.mjs",
+  "scripts": {
+    "sass-main": "node-sass ./css/main.scss ./css/main.css --output-style compressed | postcss ./css/main.css --use autoprefixer -o ./css/main.css",
+    "sass-layout": "node-sass ./css/styles/layout.scss ./css/styles/layout.css --output-style compressed | postcss ./css/styles/layout.css --use autoprefixer -o ./css/styles/layout.css",
+    "sass-design": "node-sass ./css/styles/design.scss ./css/styles/design.css --output-style compressed | postcss ./css/styles/design.css --use autoprefixer -o ./css/styles/design.css",
+    "sass-animations": "node-sass ./css/styles/animations.scss ./css/styles/animations.css --output-style compressed | postcss ./css/styles/animations.css --use autoprefixer -o ./css/styles/animations.css",
+    "sass-typography": "node-sass ./css/styles/typography.scss ./css/styles/typography.css --output-style compressed | postcss ./css/styles/typography.css --use autoprefixer -o ./css/styles/typography.css"
+  },
+  "keywords": [
+    "word game",
+    "guessing game",
+    "web application",
+    "HTML",
+    "Sass",
+    "Vanilla JS",
+    "frontend",
+    "game development"
+  ],
+  "author": "Marwan Ghanem",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "node-sass": "^9.0.0",
+    "parcel": "^2.9.3",
+    "postcss": "^8.4.27",
+    "postcss-cli": "^10.1.0"
+  }
+}

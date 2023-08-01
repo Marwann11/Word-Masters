@@ -156,8 +156,7 @@ function detectPreferredColorScheme() {
 // initial check to know if a switch to dark theme is needed based on user preference
 function initialDarkModeCheck() {
   if (userPreference === "dark") {
-    // change aria-checked and data-theme attribute to dark mode
-    checkbox.setAttribute("aria-checked", "true");
+    // change data-theme attribute to dark mode
     checkbox.setAttribute("data-theme", "dark");
     // switch to dark theme
     handleThemeChange();
