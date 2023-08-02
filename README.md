@@ -7,7 +7,7 @@ In this Project, I have created a *guessing word game*, which is a client-side w
 ## Project Features
 - Word-Guessing: players can try to guess a **_five-letter_** word within a total of **_six_** attempts.
 
-- Word-Validation: the application validates the guessed word and checks if the word is a valid english **_five-letter_** word.
+- Word-Validation: the application validates the guessed word and checks if the word is a valid English **_five-letter_** word.
 
 - Feedback: provide feedback for the player for each guessed letter, to indicate if the **letter is in the word** and if it's **at the right position**
 
@@ -25,4 +25,4 @@ _Feel free to explore the project and have fun guessing words_ 💙
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE.txt) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Marwann11/Word-Masters/blob/main/license.txt) file for details.
