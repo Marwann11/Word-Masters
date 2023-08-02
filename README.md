@@ -11,7 +11,7 @@ In this Project, I have created a *guessing word game*, which is a client-side w
 
 - Feedback: provide feedback for the player for each guessed letter, to indicate if the **letter is in the word** and if it's **at the right position**
 
-- Smooth-UX: interface is designed with a focus on **accessability**, **performance** and **mobile responsiveness**.
+- Smooth-UX: interface is designed **with** a focus on **accessability**, **performance** and **mobile responsiveness**.
 
 ## Technologies Used
 - **HTML**
@@ -25,4 +25,4 @@ _Feel free to explore the project and have fun guessing words_ 💙
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE.txt) file for details.
