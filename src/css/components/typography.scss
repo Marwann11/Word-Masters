@@ -1,0 +1,49 @@
+@import "variables";
+
+//* fonts
+@font-face {
+  font-family: "martian-mono";
+  src: url(fonts/martian-mono/MartianMono-VariableFont_wdth\,wght.ttf)
+    format("truetype");
+}
+
+body {
+  font-family: "martian-mono", $fallback-fonts;
+}
+
+header {
+  .header__title {
+    font-size: clamp(1rem, 2.5vmax, 1.6rem);
+    font-weight: 800;
+    font-variation-settings: "wdth" 87.5;
+  }
+}
+
+.feedback-message {
+  @media (max-width: 800px) {
+    font-size: clamp(0.6rem, 0.8vmax, 0.9rem);
+  }
+  @media (min-width: 800px) {
+    font-size: clamp(0.6rem, 0.6vmax, 0.75rem);
+  }
+  font-weight: 800;
+}
+
+.game-board__letter {
+  font-weight: 700;
+  font-size: clamp(1rem, 2.5vmin, 1.75rem);
+}
+
+.keyboard__letter {
+  font: 400 clamp(0.75rem, 2vmax, 1.25rem) "martian-mono", $fallback-fonts;
+}
+
+.subheader-text {
+  font-size: 80%;
+  line-height: 170%;
+  font-weight: 400;
+}
+
+.copyright {
+  font-size: 50%;
+}

@@ -1,0 +1,80 @@
+//* global variables
+%flex-object--centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+//***********
+
+//* fonts.scss
+$fallback-fonts: "Inconsolata", "Ubuntu Mono", "Roboto Mono", monospace;
+//***********
+
+//* design.scss
+//** main colors
+$main-light: #f3f3f3;
+$main-dark: #212121;
+
+//** secondary colors
+//*** header
+$blue-gradient--light: linear-gradient(120deg, #1E88E5, #64B5F6);
+$-webkit-blue-gradient--light: -webkit-linear-gradient(120deg, #1E88E5, #64B5F6);
+$blue-gradient--dark: linear-gradient(120deg, #50abfc, #83c6fd);
+$-webkit-blue-gradient--dark: -webkit-linear-gradient(120deg, #50abfc, #83c6fd);
+
+//*** keyboard
+//**** light theme
+$keyboard-bkg--light: linear-gradient(to top, #000, #484e55);
+$-webkit-keyboard-bkg--light: -webkit-linear-gradient(to top, #000, #484e55);
+
+//**** dark theme
+$keyboard-bkg--dark: linear-gradient(to top, #d7e1ec, #ffffff);
+$-webkit-keyboard-bkg--dark: -webkit-linear-gradient(to top, #d7e1ec, #ffffff);
+
+//*** letters colors
+//**** light-theme
+// empty cells-keyboard
+$letter-color--light: $main-dark;
+$letter-bkg--light: $main-light;
+// missing cells-keyboard
+$letter-color--missing-light: $main-light;
+$letter-bkg--missing-light: #5f5f5f;
+// close cells-keyboard
+$letter-color--close-light: $main-light;
+$letter-bkg--close-light: #acac0d;
+// correct cells-keyboard
+$letter-color--correct-light: $main-light;
+$letter-bkg--correct-light: #5d9b55;
+
+//**** dark-theme
+// empty cells-keyboard
+$letter-color--dark: $main-light;
+$letter-bkg--dark: $main-dark;
+// missing cells-keyboard
+$letter-color--missing-dark: $main-light;
+$letter-bkg--missing-dark: #6b6b6b;
+// close cells-keyboard
+$letter-color--close-dark: $main-light;
+$letter-bkg--close-dark: $letter-bkg--close-light;
+// correct cells-keyboard
+$letter-color--correct-dark: $main-light;
+$letter-bkg--correct-dark: $letter-bkg--correct-light;
+
+//*** tab-outlining color
+$tab-outline--light: 2px solid #349EEA;
+$tab-outline--dark: 2px solid #5EB7F9;
+
+//*** dialogs
+//**** light theme
+$dialog-color--light: $main-dark;
+$dialog-bkg--light: $main-light;
+
+//**** dark theme
+$dialog-color--dark: $main-light;
+$dialog-bkg--dark: $main-dark;
+
+
+//** box-shadows
+$box-shadow--light: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+$box-shadow--dark: rgba(205, 205, 162, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+//***********
