@@ -4,7 +4,7 @@
   "description": "This project, a client-side web application based on the well-known game Wordle, is a word-guessing game. concentrating on amazing user experience, speed, and simplicity 💙",
   "browserslist": ">0.3%, defaults, supports es6-module, maintained node versions",
   "scripts": {
-    "start": "parcel --public-url .",
+    "start": "parcel",
     "build": "parcel build src/index.html --dist-dir public/build --public-url ."
   },
   "keywords": [
@@ -20,7 +20,9 @@
   "author": "Marwan Ghanem",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.9.3",
     "@parcel/transformer-sass": "^2.9.3",
+    "@parcel/transformer-webmanifest": "^2.9.3",
     "parcel": "^2.9.3"
   }
 }
