@@ -132,7 +132,7 @@ function validationAnimation(rowCells, validationArray, keyboardButtons) {
 // function to mimic validation animation for dialog test cells
 function fakeValidationAnimation(rowCells) {
   let animationDelay = 150;
-
+  
   for (let i = 0; i < rowCells.length; i++) {
     // get current cell
     let currentCell = rowCells[i];

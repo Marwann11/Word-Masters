@@ -185,7 +185,7 @@ dialog {
 //* settings
 .settings-wrapper {
   display: grid;
-  grid-template-rows: 50px auto auto 30px;
+  grid-template-rows: 50px repeat(2, auto) 50px;
   height: 100%;
   width: 100%;
   .settings__row {
@@ -201,6 +201,9 @@ dialog {
   .settings__row:last-child {
     justify-content: center;
   }
+  .settings__row:last-child {
+    align-items: flex-end;
+  }
 }
 
 .row-separator {
@@ -211,6 +214,15 @@ dialog {
   bottom: 0;
   left: 50%;
   transform: translate(-50%);
+}
+
+.source-notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    margin-left: 10px;
+  }
 }
 
 //** Theme
@@ -253,7 +265,7 @@ dialog {
   .how-to-play__wrapper {
     display: grid;
     position: relative;
-    grid-template-rows: repeat(9, auto) 40px;
+    grid-template-rows: repeat(9, auto) 50px;
     .how-to-play__row {
       display: flex;
     }

@@ -1,4 +1,5 @@
-import { feedbackMessage } from "./validation.mjs"
+import { feedbackMessage } from "./validation.mjs";
+import { openDialog } from './buttons.mjs';
 
 
 //****************************************************** */
@@ -52,6 +53,8 @@ function isDayPassed() {
   if (firstSession) {
     // set new date key
     setNewDate();
+    // show how to play For first user session
+    openDialog("howToPlay");
     return true;
   } else { // on other sessions
     const todayDate = getTodayDate();

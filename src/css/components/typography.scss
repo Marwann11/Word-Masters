@@ -45,6 +45,6 @@ header {
   font-weight: 400;
 }
 
-.copyright {
-  font-size: 50%;
+.source-notice {
+  font-size: clamp(0.5rem, 80%, 0.8rem);
 }

@@ -3,10 +3,11 @@ import { initialDarkModeCheck } from "./modules/buttons.mjs";
 import { addFunctionality, handleButtonsEvents } from "./helper.mjs";
 import { isDayPassed, setNewDate, removeYesterdayDate } from './modules/wordOfTheDay.mjs';
 
-// check if it's a new day
-const isNewDay = isDayPassed();
 
 function main() {
+  // check if it's a new day
+  const isNewDay = isDayPassed();
+  
   // if there is a saved game state and a day hasn't passed yet
   if (previousGameState.currentRow !== -1 && !isNewDay) {
     applyPreviousGameState(previousGameState);

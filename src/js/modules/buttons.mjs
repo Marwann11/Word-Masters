@@ -32,7 +32,7 @@ const singleHyphenElements = [
 const doubleHyphenElements = [
   "game-board__letter", "keyboard__letter", "row-separator", "fake-letter",
   "subheader-text", "how-to-play__headings", "how-to-play__list", "loading-container",
-  "loading-spinner"
+  "loading-spinner", "source-notice"
 ];
 
 
@@ -406,13 +406,40 @@ function handleHowToPlayButton() {
 function openHowToPlayEvent() {
   openDialog("howToPlay");
   // get fake word row in the dialog
-  const fakeWordRow = document.querySelector(".fake-game-row").children;
-  // animate the row on opening dialog
-  fakeValidationAnimation(fakeWordRow);
+  const fakeWordRow = document.querySelector(".fake-game-row");
+  const fakeWordCells = fakeWordRow.children;
+  // animate the fake row when in viewport
+  /*
+    * to avoid repeating animations if scrolled more than once
+  */
+  let observationsLeft = 1;
+  
+  // the callback for observer
+  function fakeRowObserver(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && observationsLeft > 0) {
+        observationsLeft--;
+        fakeValidationAnimation(fakeWordCells);
+      }
+    })
+  }
+  // observer options
+  const intersectionOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1
+  }
+  // create a new observer
+  const observer = new IntersectionObserver(fakeRowObserver, intersectionOptions);
+  // observe the fake row
+  observer.observe(fakeWordRow);
 }
 
 function closeHowToPlayEvent() {
   closeDialog("howToPlay");
 }
 
-export {handleSettingsButton, handleThemeButton, handleHowToPlayButton, initialDarkModeCheck};
+
+
+
+export {handleSettingsButton, handleThemeButton, handleHowToPlayButton, initialDarkModeCheck, openDialog};
