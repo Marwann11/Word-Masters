@@ -11,6 +11,7 @@
   <meta name="description" content="WordMasters is a fun guessing game that draws its inspiration
         from Wordle. Put your knowledge to the test by correctly guessing a
         five-letter English word in six trials. Have pleasure and delight in. 💙">
+  <link rel="canonical" href="https://marwann11.github.io/Word-Masters/">
   <!-- for android chrome -->
   <link rel="icon" type="image/png" sizes="192x192" href="./css/images/favicon/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="./css/images/favicon/android-chrome-512x512.png">
@@ -22,6 +23,15 @@
   <link rel="icon" type="image/png" sizes="16x16" href="./css/images/favicon/favicon-16x16.png">
   <!-- Favicon for Internet Explorer -->
   <link rel="shortcut icon" href="./css/images/favicon/favicon.ico">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1B3RMVPWRG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1B3RMVPWRG');
+  </script>
 </head>
 
 <body>
@@ -29,15 +39,15 @@
     <div class="header__title">Word Masters</div>
     <div class="controls-container">
       <button type="button" class="how-to-play-btn">
-        <img class="light-theme__svg" src="./css/images/theme/how-to-play-button/question-mark-light.svg"
+        <img class="light-theme__svg" loading="lazy" width="30" height="25" src="./css/images/theme/how-to-play-button/question-mark-light.svg"
           alt="how to play button in light mode">
-        <img class="dark-theme__svg" hidden src="./css/images/theme/how-to-play-button/question-mark-dark.svg"
+        <img class="dark-theme__svg" loading="lazy" width="30" height="25" hidden src="./css/images/theme/how-to-play-button/question-mark-dark.svg"
           alt="how to play button in dark mode">
       </button>
       <button type="button" class="settings-btn">
-        <img class="light-theme__svg" src="./css/images/theme/settings-button/settings-light.svg"
+        <img class="light-theme__svg" loading="lazy" width="30" height="25" src="./css/images/theme/settings-button/settings-light.svg"
           alt="Settings button in light mode">
-        <img class="dark-theme__svg" hidden src="./css/images/theme/settings-button/settings-dark.svg"
+        <img class="dark-theme__svg" loading="lazy" width="30" height="25" hidden src="./css/images/theme/settings-button/settings-dark.svg"
           alt="Settings button in dark mode">
       </button>
     </div>
@@ -127,9 +137,9 @@
         <button class="keyboard__letter" aria-label="N">N</button>
         <button class="keyboard__letter" aria-label="M">M</button>
         <button class="keyboard__letter backspace-button" aria-label="Backspace">
-          <img class="light-theme__svg" src="./css/images/keyboard/backspace-light.svg"
+          <img class="light-theme__svg" loading="lazy" src="./css/images/keyboard/backspace-light.svg"
             alt="backspace button in light theme">
-          <img class="dark-theme__svg" hidden src="./css/images/keyboard/backspace-dark.svg"
+          <img class="dark-theme__svg" loading="lazy" hidden src="./css/images/keyboard/backspace-dark.svg"
             alt="backspace button in dark theme">
         </button>
       </div>
@@ -139,9 +149,9 @@
     <div class="settings-wrapper">
       <div class="settings__row">
         <button class="close-button settings-close">
-          <img class="light-theme__svg" src="./css/images/theme/close-button/close-light.svg"
+          <img class="light-theme__svg" loading="lazy" src="./css/images/theme/close-button/close-light.svg"
             alt="close button in light theme">
-          <img class="dark-theme__svg" hidden src="./css/images/theme/close-button/close-dark.svg"
+          <img class="dark-theme__svg" loading="lazy" hidden src="./css/images/theme/close-button/close-dark.svg"
             alt="close button in dark theme">
         </button>
         <h2>Settings</h2>
@@ -153,8 +163,8 @@
         <label class="theme-switch" aria-label="dark mode button">
           <input type="checkbox" tabindex="0" class="switch__checkbox" data-theme="light">
           <span class="switch-slider">
-            <img src="./css/images/theme/dark-mode-button/sun.svg" alt="dark mode off">
-            <img src="./css/images/theme/dark-mode-button/moon.svg" alt="dark mode on">
+            <img src="./css/images/theme/dark-mode-button/sun.svg" loading="lazy" alt="dark mode off">
+            <img src="./css/images/theme/dark-mode-button/moon.svg" loading="lazy" alt="dark mode on">
           </span>
         </label>
         <div class="row-separator"></div>
@@ -173,9 +183,9 @@
     <div class="how-to-play__wrapper">
       <div class="how-to-play__row">
         <button class="close-button how-to-play-close">
-          <img class="light-theme__svg" src="./css/images/theme/close-button/close-light.svg"
+          <img class="light-theme__svg" loading="lazy" src="./css/images/theme/close-button/close-light.svg"
             alt="close button in light theme">
-          <img class="dark-theme__svg" hidden src="./css/images/theme/close-button/close-dark.svg"
+          <img class="dark-theme__svg" loading="lazy" hidden src="./css/images/theme/close-button/close-dark.svg"
             alt="close button in dark theme">
         </button>
         <h2>How to play</h2>
