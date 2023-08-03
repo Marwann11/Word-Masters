@@ -5,7 +5,7 @@
   "browserslist": ">0.3%, defaults, supports es6-module, maintained node versions",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build src/index.html --dist-dir public/build --public-url ."
+    "build": "parcel build src/index.html --dist-dir public --public-url ."
   },
   "keywords": [
     "word game",
