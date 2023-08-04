@@ -1,5 +1,5 @@
 import { feedbackMessage } from "./validation.mjs";
-import { openDialog } from './buttons.mjs';
+import { openDialog, fakeRowObserver } from './buttons.mjs';
 
 
 //****************************************************** */
@@ -53,8 +53,14 @@ function isDayPassed() {
   if (firstSession) {
     // set new date key
     setNewDate();
-    // show how to play For first user session
+    // show how to play On first user session
     openDialog("howToPlay");
+    // get fake word row in the dialog
+    const fakeWordRow = document.querySelector(".fake-game-row");
+    const fakeWordCells = fakeWordRow.children;
+    // animate the fake row when in viewport
+    fakeRowObserver(fakeWordRow, fakeWordCells);
+
     return true;
   } else { // on other sessions
     const todayDate = getTodayDate();

@@ -235,10 +235,11 @@ function dialogsExitAnimation(dialog) {
   }, 500)
 }
 
+//* Function to show loading spinner element
 function showLoading() {
   loadingElement.style.visibility = "visible";
 }
-
+//* Function to hide loading spinner element
 function hideLoading() {
   loadingElement.style.visibility = "hidden";
 }

@@ -1,5 +1,5 @@
-import {addFunctionality, removeFunctionality} from "../helper.mjs"
-import {fakeValidationAnimation, dialogsEntryAnimation, dialogsExitAnimation} from "./animations.mjs"
+import { addFunctionality, removeFunctionality } from "../helper.mjs"
+import { fakeValidationAnimation, dialogsEntryAnimation, dialogsExitAnimation } from "./animations.mjs"
 
 
 //********************* */
@@ -18,7 +18,7 @@ let firstThemeChange = true;
 
 // all the single elements classes needed to apply dark mode
 const singleElementsClasses = [
-"feedback-message", "header__title", "keyboard", "theme-switch"
+  "feedback-message", "header__title", "keyboard", "theme-switch"
 ]
 
 // all the multiple elements classes needed to apply dark mode
@@ -94,7 +94,7 @@ function closeDialog(dialogName) {
   // remove both dialog related event listeners
   document.removeEventListener("keydown", EscKeyDialogEvent);
   document.removeEventListener("click", outsideDialogAreaEvent);
-  
+
   // add user input event listeners to regain interactivity
   addFunctionality();
 }
@@ -106,7 +106,7 @@ function closeDialog(dialogName) {
 let EscKeyDialogEvent;
 
 function handleEscKeyClick(dialogName) {
-  EscKeyDialogEvent =  (ev) => {
+  EscKeyDialogEvent = (ev) => {
     if (ev.key === "Escape") {
       // prevent default behavior for ESC key with modal dialogs
       ev.preventDefault();
@@ -300,7 +300,7 @@ function handleMultipleElements(elements, method) {
         /* 
           * for each element classList check for which classes he have from
           * the multipleElementsClasses array
-        */ 
+        */
         for (let elemClass of child.classList) {
           // elements classes that needs one hyphen to apply dark mode classes
           const singleHyphenArr = multipleElementsClasses[0];
@@ -404,18 +404,28 @@ function handleHowToPlayButton() {
 }
 
 function openHowToPlayEvent() {
+  // open how-to-play dialog
   openDialog("howToPlay");
   // get fake word row in the dialog
   const fakeWordRow = document.querySelector(".fake-game-row");
   const fakeWordCells = fakeWordRow.children;
   // animate the fake row when in viewport
-  /*
-    * to avoid repeating animations if scrolled more than once
-  */
+  fakeRowObserver(fakeWordRow, fakeWordCells);
+}
+
+function closeHowToPlayEvent() {
+  closeDialog("howToPlay");
+}
+
+/*
+  * Function to observe if the fake word row in settings dialog is in viewport 
+*/
+function fakeRowObserver(fakeWordRow, fakeWordCells) {
+  //* to avoid repeating animations if scrolled more than once
   let observationsLeft = 1;
-  
+
   // the callback for observer
-  function fakeRowObserver(entries) {
+  function fakeRowCallback(entries) {
     entries.forEach((entry) => {
       if (entry.isIntersecting && observationsLeft > 0) {
         observationsLeft--;
@@ -430,16 +440,12 @@ function openHowToPlayEvent() {
     threshold: 1
   }
   // create a new observer
-  const observer = new IntersectionObserver(fakeRowObserver, intersectionOptions);
+  const observer = new IntersectionObserver(fakeRowCallback, intersectionOptions);
   // observe the fake row
   observer.observe(fakeWordRow);
 }
 
-function closeHowToPlayEvent() {
-  closeDialog("howToPlay");
-}
-
-
-
-
-export {handleSettingsButton, handleThemeButton, handleHowToPlayButton, initialDarkModeCheck, openDialog};
+export {
+  handleSettingsButton, handleThemeButton, handleHowToPlayButton,
+  initialDarkModeCheck, openDialog, fakeRowObserver
+};
