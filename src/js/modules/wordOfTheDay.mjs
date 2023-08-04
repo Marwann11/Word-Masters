@@ -53,14 +53,20 @@ function isDayPassed() {
   if (firstSession) {
     // set new date key
     setNewDate();
-    // show how to play On first user session
-    openDialog("howToPlay");
-    // get fake word row in the dialog
-    const fakeWordRow = document.querySelector(".fake-game-row");
-    const fakeWordCells = fakeWordRow.children;
-    // animate the fake row when in viewport
-    fakeRowObserver(fakeWordRow, fakeWordCells);
-
+    /*
+      * set timeout for opening the how to play dialog
+      * To avoid execution of openDialog function before the main function (main.mjs) has executed
+        ** (execute at the first next event cycle) 
+    */ 
+    setTimeout(() => {
+      // show how to play on first user session
+      openDialog("howToPlay");
+      // get fake word row in the dialog
+      const fakeWordRow = document.querySelector(".fake-game-row");
+      const fakeWordCells = fakeWordRow.children;
+      // animate the fake row when in viewport
+      fakeRowObserver(fakeWordRow, fakeWordCells);
+    })
     return true;
   } else { // on other sessions
     const todayDate = getTodayDate();

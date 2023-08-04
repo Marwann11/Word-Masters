@@ -12,9 +12,8 @@ const howToPlayDialog = document.querySelector(".how-to-play-dialog");
 // dark mode switch and checkbox and user OS color scheme preference
 const darkModeSwitch = document.querySelector(".theme-switch");
 const checkbox = darkModeSwitch.querySelector(".switch__checkbox");
-let userPreference = detectPreferredColorScheme();
 // track first theme change
-let firstThemeChange = true;
+// let firstThemeChange = true;
 
 // all the single elements classes needed to apply dark mode
 const singleElementsClasses = [
@@ -157,39 +156,33 @@ function closeSettingsEvent() {
   ** Dark mode Functions
 ****************************/
 
-// detect user preferred color scheme
-function detectPreferredColorScheme() {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+/*********************
+  * Main Functions
+**********************/
 
-  return prefersDark ? "dark" : "light";
-}
-
-// initial check to know if a switch to dark theme is needed based on user preference
+//* initial check function to know if a switch to dark theme is needed based on user preference
 function initialDarkModeCheck() {
+  // get current user preference
+  let userPreference = detectPreferredColorScheme();
+
   if (userPreference === "dark") {
-    // change data-theme attribute to dark mode
-    checkbox.setAttribute("data-theme", "dark");
     // switch to dark theme
     handleThemeChange();
-    // track change
-    firstThemeChange = false;
-    // click checkbox for correct position of checkbox in dark mode
-    checkbox.click();
   }
 }
 
-/*
-  * main function for the dark mode button
-*/
+//* main function for the dark mode button
 function handleThemeButton() {
   // add theme button event listener
   checkbox.addEventListener("click", handleThemeChange);
 }
 
 
-/*
-  * main event handler for the dark mode button
-*/
+/*********************
+  * helper Functions
+**********************/
+
+//* main event handler for the dark mode button
 function handleThemeChange() {
   // get current theme
   let currentTheme = checkbox.getAttribute("data-theme");
@@ -199,20 +192,42 @@ function handleThemeChange() {
   const multipleElements = getMultipleElements(multipleElementsClasses);
 
   // if current theme is light or on first theme change
-  if (currentTheme === "light" || firstThemeChange === true) {
+  if (currentTheme === "light") {
+    // add dark mode classes
     addDarkTheme(singleElements, multipleElements);
   } else {
+    // remove dark mode classes
     removeDarkTheme(singleElements, multipleElements);
   }
 }
 
+//* detect user preferred color scheme
+function detectPreferredColorScheme() {
+  // on first session
+  if (localStorage.getItem("themePreference") === null) {
+    // get user preferred color scheme
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    // save user preference in local storage
+    prefersDark ? localStorage.setItem("themePreference", "dark") : localStorage.setItem("themePreference", "light");
+    // if dark is preferable, click the checkbox to apply visual changes to button
+    if (prefersDark && checkbox.getAttribute("data-theme") === "light") {
+      checkbox.click();
+    }
+    // return user preference
+    return localStorage.getItem("themePreference");
+  } else {
+    return localStorage.getItem("themePreference");
+  }
+}
 
-/*
-  * adding dark mode function to all needed elements
-*/
+//* Dark mode applying function
 function addDarkTheme(singleElements, multipleElements) {
+  // change user preference in local storage to dark
+  localStorage.setItem("themePreference", "dark");
   // change checkbox current theme attribute to dark
   checkbox.setAttribute("data-theme", "dark");
+  // check the checkbox to apply visual changes => (handled with css)
+  checkbox.checked = true;
 
   // handle SVG changes
   svgChanger(lightThemeSVGs, darkThemeSVGs, "dark");
@@ -220,8 +235,10 @@ function addDarkTheme(singleElements, multipleElements) {
   // add theme to general elements
   const body = document.body;
   body.classList.add("body--dark");
+
   const header = document.body.querySelector("header");
   header.classList.add("header--dark");
+
   const dialogs = document.body.querySelectorAll("dialog");
   dialogs.forEach(dialog => {
     dialog.classList.add("dialog--dark");
@@ -239,32 +256,34 @@ function addDarkTheme(singleElements, multipleElements) {
 }
 
 
-/*
-  * removing dark mode function to all needed elements
-*/
+//* Dark mode removing function
 function removeDarkTheme(singleElements, multipleElements) {
+  // change user preference in local storage to light
+  localStorage.setItem("themePreference", "light");
   // change checkbox current theme attribute to light
   checkbox.setAttribute("data-theme", "light");
 
   // handle SVG changes
   svgChanger(lightThemeSVGs, darkThemeSVGs, "light");
 
-  // remove theme to general elements
+  // remove theme from general elements
   const body = document.body;
   body.classList.remove("body--dark");
+
   const header = document.body.querySelector("header");
   header.classList.remove("header--dark");
+
   const dialogs = document.body.querySelectorAll("dialog");
   dialogs.forEach(dialog => {
     dialog.classList.remove("dialog--dark");
   })
 
-  // remove dark mode to single elements using their class
+  // remove dark mode from single elements using their class
   if (singleElements.length > 0) {
     handleSingleElements(singleElements, "remove");
   }
 
-  // remove dark mode classes to each group of elements with a single class
+  // remove dark mode classes for each group of elements with a single class
   if (multipleElements.length > 0) {
     handleMultipleElements(multipleElements, "remove");
   }
