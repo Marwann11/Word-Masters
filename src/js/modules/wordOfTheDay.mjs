@@ -47,6 +47,7 @@ async function requestWordOfTheDay() {
   * true => if first user session or a day has passed
   * false => if still the same day
 */
+
 function isDayPassed() {
   // if first user session
   const firstSession = isDayNotFound();
@@ -54,10 +55,12 @@ function isDayPassed() {
     // set new date key
     setNewDate();
     /*
-      * set timeout for opening the how to play dialog
-      * To avoid execution of openDialog function before the main function (main.mjs) has executed
-        ** (execute at the first next event cycle) 
+      * setTimeout for opening the dialog to put the execution on the next event cycle
+      * (because the main function adds the functionality after this function is called)
+      * and removal of the event listeners with openDialog function would do nothing
+      * and event listeners would be added twice
     */ 
+    
     setTimeout(() => {
       // show how to play on first user session
       openDialog("howToPlay");
@@ -66,7 +69,8 @@ function isDayPassed() {
       const fakeWordCells = fakeWordRow.children;
       // animate the fake row when in viewport
       fakeRowObserver(fakeWordRow, fakeWordCells);
-    })
+    }, 1000)
+
     return true;
   } else { // on other sessions
     const todayDate = getTodayDate();
