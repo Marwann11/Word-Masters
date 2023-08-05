@@ -1,5 +1,5 @@
 import { feedbackMessage } from "./validation.mjs";
-import { openDialog, fakeRowObserver } from './buttons.mjs';
+import { openHowToPlayDialog } from './buttons.mjs';
 
 
 //****************************************************** */
@@ -54,22 +54,10 @@ function isDayPassed() {
   if (firstSession) {
     // set new date key
     setNewDate();
-    /*
-      * setTimeout for opening the dialog to put the execution on the next event cycle
-      * (because the main function adds the functionality after this function is called)
-      * and removal of the event listeners with openDialog function would do nothing
-      * and event listeners would be added twice
-    */ 
     
-    setTimeout(() => {
-      // show how to play on first user session
-      openDialog("howToPlay");
-      // get fake word row in the dialog
-      const fakeWordRow = document.querySelector(".fake-game-row");
-      const fakeWordCells = fakeWordRow.children;
-      // animate the fake row when in viewport
-      fakeRowObserver(fakeWordRow, fakeWordCells);
-    }, 1000)
+    
+
+    delayedOpenDialog();
 
     return true;
   } else { // on other sessions
@@ -168,6 +156,34 @@ function decodeWord(encodedWord) {
   }
 
   return decodedWord;
+}
+
+/*
+  * This is a function that delays the opening of how to play dialog
+  * based on network speeds
+*/ 
+async function delayedOpenDialog() {
+  // calculate network speed based on how fast word of the day is fetched
+  const startTime = performance.now();
+  // get today word and save it in local storage
+  await getTodayWord();
+  const endTime = performance.now();
+
+  const timeTaken = endTime - startTime;
+  /*
+    *  the main function execution time in seconds
+      ** after some testing, this is roughly the JS execution time
+      ** based on network speed alone (not device processing power)
+      
+    * safety delay is also arbitrarily set after some network speed testing
+  */
+  const jsExecutionTime = timeTaken * 2;
+  const additionalSafetyDelay = 500;
+
+  //* delay dialog opening based on network speed
+  await new Promise(resolve => setTimeout(resolve, jsExecutionTime + additionalSafetyDelay));
+
+  openHowToPlayDialog();
 }
 
 export { getTodayWord, isDayPassed, setNewDate, removeYesterdayDate }

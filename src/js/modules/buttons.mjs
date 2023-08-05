@@ -418,11 +418,11 @@ function handleHowToPlayButton() {
   const howToPlayBtn = document.body.querySelector(".how-to-play-btn");
   const howToPlayCloseBtn = document.body.querySelector(".how-to-play-close");
 
-  howToPlayBtn.addEventListener("click", openHowToPlayEvent);
-  howToPlayCloseBtn.addEventListener("click", closeHowToPlayEvent);
+  howToPlayBtn.addEventListener("click", openHowToPlayDialog);
+  howToPlayCloseBtn.addEventListener("click", closeHowToPlayDialog);
 }
 
-function openHowToPlayEvent() {
+function openHowToPlayDialog() {
   // open how-to-play dialog
   openDialog("howToPlay");
   // get fake word row in the dialog
@@ -432,7 +432,7 @@ function openHowToPlayEvent() {
   fakeRowObserver(fakeWordRow, fakeWordCells);
 }
 
-function closeHowToPlayEvent() {
+function closeHowToPlayDialog() {
   closeDialog("howToPlay");
 }
 
@@ -466,5 +466,5 @@ function fakeRowObserver(fakeWordRow, fakeWordCells) {
 
 export {
   handleSettingsButton, handleThemeButton, handleHowToPlayButton,
-  initialDarkModeCheck, openDialog, fakeRowObserver
+  initialDarkModeCheck, openHowToPlayDialog
 };
