@@ -64,16 +64,20 @@ function onKeyDown(wordOfTheDay) {
       const key = ev.key;
       // check if gameBoard values has been changed
       cellsChanged = handleInput(rowCells, key);
-    
+
       if (cellsChanged) {
-        // typing animation only
+        /*
+          * handle cells adding animation only here
+            ** backspace animation is handled in the handleInput function
+            ** enter animation is handled in the enter block (completeValidationCheck)
+        */ 
         if (key !== "Backspace" && key !== "Enter") cellAnimation(rowCells, key);
-    
+
         // handle enter key animation in the enter validation block
         if (key !== "Enter") {
           keyboardAnimation(keyboardBtns, key);
         }
-    
+
         // if validation
         if (key === "Enter") {
           // check the current focused element
@@ -120,12 +124,12 @@ function onKeyboardClick(wordOfTheDay) {
       const rowCells = document.querySelector(".game-board__row[data-state='TBD']").children;
       // current clicked button
       const clickedButton = ev.target;
-    
+
       // if not a button
       if (!(clickedButton instanceof HTMLButtonElement || clickedButton instanceof HTMLImageElement)) {
         return;
       }
-    
+
       if (clickedButton instanceof HTMLImageElement || clickedButton.classList.contains("backspace-button")) { // if Deleting letters (Backspace)
         cellsChanged = handleInput(rowCells, "Backspace");
       } else if (clickedButton.classList.contains("enter-button")) { // if Validating (Enter)
@@ -134,10 +138,10 @@ function onKeyboardClick(wordOfTheDay) {
         completeValidationCheck(rowCells, keyboardBtns, wordOfTheDay);
       } else { // for other buttons
         cellsChanged = handleInput(rowCells, clickedButton.innerHTML);
-    
+
         if (cellsChanged) cellAnimation(rowCells, clickedButton.innerHTML);
       }
-    
+
       // deFocus from the clicked button
       clickedButton.blur();
     }

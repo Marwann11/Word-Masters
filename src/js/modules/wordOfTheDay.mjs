@@ -2,10 +2,15 @@ import { feedbackMessage } from "./validation.mjs";
 import { openHowToPlayDialog } from './buttons.mjs';
 
 
-//****************************************************** */
+//********************* */
 //* Main Functions
-//****************************************************** */
+//********************* */
 
+/*
+  * The main function for fetching word of the day
+    ** if first session or first fetch of the day => returns the word from the API
+    ** otherwise => returns the word from local storage
+*/ 
 async function getTodayWord() {
   // check if a day has passed since the last session
   const isNewDay = isDayPassed();
@@ -19,55 +24,55 @@ async function getTodayWord() {
   }
 }
 
-//****************************************************** */
-//* Helper Functions
-//****************************************************** */
-async function initNewWord() {
-  // get new word
-  const wordOfTheDay = await requestWordOfTheDay();
-
-  localStorage.setItem("wordOfTheDay", encodeWord(wordOfTheDay));
-
-  return wordOfTheDay;
-}
-
-async function requestWordOfTheDay() {
-  const promise = fetch("https://words.dev-apis.com/word-of-the-day");
-
-  return promise
-    .then((response) => response.json())
-    .then((responseObject) => responseObject.word)
-    .catch(() => {
-      feedbackMessage(`Server error 😐`, false);
-    })
-}
-
 /*
   * This function compares current day vs day saved in local storage
-  * true => if first user session or a day has passed
-  * false => if still the same day
+    ** true => if first user session or a day has passed
+    ** false => if still the same day
 */
-
 function isDayPassed() {
   // if first user session
   const firstSession = isDayNotFound();
   if (firstSession) {
     // set new date key
     setNewDate();
-    
-    
-
-    delayedOpenDialog();
-
+    // open how to play dialog
+    delayedHowToPlayOpen();
+    // return that a day has passed
     return true;
-  } else { // on other sessions
+  } else {
     const todayDate = getTodayDate();
     // compare current day against localStorage saved day
     return todayDate !== localStorage.getItem("currentDay");
   }
 }
 
-// get current day as a string "day/month/year" relative to GMT+0000 (UTC) => reset time for word of the day
+//********************* */
+//* Helper Functions
+//********************* */
+
+//* Function to get a new word from the API
+async function initNewWord() {
+  // get new word
+  const wordOfTheDay = await requestWordOfTheDay();
+  // encode and store in local storage
+  localStorage.setItem("wordOfTheDay", encodeWord(wordOfTheDay));
+
+  return wordOfTheDay;
+}
+
+//* Function to handle Promise resolution or rejection when fetching a new word
+async function requestWordOfTheDay() {
+  const promise = fetch("https://words.dev-apis.com/word-of-the-day");
+
+  return promise
+    .then(response => response.json())
+    .then(responseObject => responseObject.word)
+    .catch(() => {
+      feedbackMessage(`Server error 😐`, false);
+    })
+}
+
+//* get current day as a string "day/month/year" relative to GMT+0000 (UTC) => reset time for word of the day
 function getTodayDate() {
   const currentDate = new Date();
   const currentDay = `${currentDate.getUTCDate()}/${currentDate.getUTCMonth() + 1}/${currentDate.getUTCFullYear()}`;
@@ -75,18 +80,18 @@ function getTodayDate() {
   return currentDay;
 }
 
-// Function to set a new date
+//* Function to set a new date
 function setNewDate() {
   localStorage.setItem("currentDay", getTodayDate());
 }
 
-// Function to remove the current date from the local storage
+//* Function to remove the current date from the local storage
 function removeYesterdayDate() {
   localStorage.removeItem("currentDay");
 }
 
 /*
-  * Function to check if a day key exists in localStorage
+  * Function to check if a day key does not exist in localStorage
   * if not found => return true
   * otherwise => return false
 */
@@ -99,10 +104,34 @@ function isDayNotFound() {
 }
 
 /*
-  * Double functions that handle scrambling the word when stored in local storage
-  * and unscrambling it when retrieved
-*/
+  * This is a function that delays the opening of how to play dialog
+  * based on network speed
+*/ 
+async function delayedHowToPlayOpen() {
+  // calculate network speed based on how fast word of the day is fetched
+  const startTime = performance.now();
+  // get today word and save it in local storage
+  await getTodayWord();
+  const endTime = performance.now();
 
+  const timeTaken = endTime - startTime;
+  /*
+    *  the main function execution time in seconds
+      ** after some testing, this is roughly the JS execution time
+      ** based on network speed alone (not device processing power)
+      
+    * safety delay is also arbitrarily set after some network speed testing
+  */
+  const jsExecutionTime = timeTaken * 2;
+  const additionalSafetyDelay = 500;
+
+  //* delay dialog opening based on network speed
+  await new Promise(resolve => setTimeout(resolve, jsExecutionTime + additionalSafetyDelay));
+
+  openHowToPlayDialog();
+}
+
+//* Function to scramble word of the day before storing it in the local storage
 function encodeWord(word) {
   // fake array to add additional characters from to the encoded string
   const fakeHashArr = ["!", "$", "7", "&", "?", "p", "q", "r", "/", "<", "g", ".", "5", "i",
@@ -134,6 +163,7 @@ function encodeWord(word) {
   return encodedWord;
 }
 
+//* Function to unscramble word of the day before retrieving it from the local storage
 function decodeWord(encodedWord) {
   // initial variables
   let addedCharsForLetter = 26;
@@ -156,34 +186,6 @@ function decodeWord(encodedWord) {
   }
 
   return decodedWord;
-}
-
-/*
-  * This is a function that delays the opening of how to play dialog
-  * based on network speeds
-*/ 
-async function delayedOpenDialog() {
-  // calculate network speed based on how fast word of the day is fetched
-  const startTime = performance.now();
-  // get today word and save it in local storage
-  await getTodayWord();
-  const endTime = performance.now();
-
-  const timeTaken = endTime - startTime;
-  /*
-    *  the main function execution time in seconds
-      ** after some testing, this is roughly the JS execution time
-      ** based on network speed alone (not device processing power)
-      
-    * safety delay is also arbitrarily set after some network speed testing
-  */
-  const jsExecutionTime = timeTaken * 2;
-  const additionalSafetyDelay = 500;
-
-  //* delay dialog opening based on network speed
-  await new Promise(resolve => setTimeout(resolve, jsExecutionTime + additionalSafetyDelay));
-
-  openHowToPlayDialog();
 }
 
 export { getTodayWord, isDayPassed, setNewDate, removeYesterdayDate }

@@ -19,8 +19,8 @@ const previousGameState = JSON.parse(handlePreviousGameState());
 
 /*
   * Function that retrieves previous user progress or creates new one
-  * if first session or a new day => initiate a new userProgress object
-  * otherwise => get previous user progress object
+    ** if first session or a new day => initiate a new userProgress object
+    ** otherwise => get previous user progress object
 */
 function handlePreviousGameState() {
   if (localStorage.getItem("userProgress") === null || isDayPassed()) {
@@ -51,9 +51,7 @@ function saveGameState(rowCells) {
   localStorage.setItem("userProgress", JSON.stringify(previousGameState));
 }
 
-/*
-  * This function applies last user session game state
-*/
+//* This function applies last user session game state
 async function applyPreviousGameState(previousGameState) {
   // set user current row
   userProgress.currentRow = previousGameState.currentRow + 1;
@@ -86,9 +84,7 @@ function removePreviousGameState() {
 //* Helper Functions
 //****************************************************** */
 
-/*
-  * this function initiates a user progress Object in the local storage and returns it
-*/
+//* this function initiates a user progress Object in the local storage and returns it
 function initUserProgress() {
   // initialize initial variables
   const totalRows = 6;
@@ -116,7 +112,7 @@ function initUserProgress() {
     * rowsData => the text data for each cell, with a total of five cells for each row
     * rowsClasses => the applied class for each cell on each row
     * keyboardClasses => the applied class for each keyboard button
-    * isSolved => boolean indicating whether the puzzle is solved or not
+    * isSolved => boolean indicating whether the word is solved or not
   */
   localStorage.setItem("userProgress", JSON.stringify({
     currentRow: -1,
@@ -129,10 +125,7 @@ function initUserProgress() {
   return localStorage.getItem("userProgress");
 }
 
-/*
-  * Helper function to set previous cells state (text - classes)
-*/
-
+//* Helper function to set previous cells state (text - classes)
 function setPreviousCellsState() {
   // set completed rows data and classes to previous game state
   // get all rows
@@ -165,9 +158,7 @@ function setPreviousCellsState() {
   }
 }
 
-/*
-  * Helper function to set previous keyboard state (classes)
-*/
+//* Helper function to set previous keyboard state (classes)
 function setPreviousKeyboardState() {
   // Get all buttons (without enter and backspace buttons)
   const allButtons = document.querySelectorAll(".keyboard__letter:not(.enter-button):not(.backspace-button)");
@@ -196,6 +187,7 @@ function setPreviousKeyboardState() {
   }
 }
 
+//* Function to save current Cells text and classes after each validation 
 function saveCellsState(rowCells) {
   //* save cells text and classes data
   const totalRowCells = 5;
@@ -222,6 +214,7 @@ function saveCellsState(rowCells) {
   }
 }
 
+//* Function that saves keyboard buttons added classes after each validation
 function saveKeyboardState() {
   // total keyboard buttons (without enter and backspace)
   const totalKeyboardBtns = 26;
@@ -243,4 +236,8 @@ function saveKeyboardState() {
   }
 }
 
-export { userProgress, previousGameState, handlePreviousGameState, applyPreviousGameState, saveGameState, removePreviousGameState}
+export {
+  userProgress, previousGameState,
+  handlePreviousGameState, applyPreviousGameState,
+  saveGameState, removePreviousGameState
+}

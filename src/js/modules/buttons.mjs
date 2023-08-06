@@ -6,46 +6,44 @@ import { fakeValidationAnimation, dialogsEntryAnimation, dialogsExitAnimation } 
 //* Global Variables
 //********************* */
 
-// settings and howToPlay dialogs
+//* settings and howToPlay dialogs
 const settingsDialog = document.querySelector(".settings-dialog");
 const howToPlayDialog = document.querySelector(".how-to-play-dialog");
-// dark mode switch and checkbox and user OS color scheme preference
+
+//* dark mode switch and checkbox and user OS color scheme preference
 const darkModeSwitch = document.querySelector(".theme-switch");
 const checkbox = darkModeSwitch.querySelector(".switch__checkbox");
-// track first theme change
-// let firstThemeChange = true;
 
-// all the single elements classes needed to apply dark mode
+//* all the single elements classes needed to apply dark mode
 const singleElementsClasses = [
   "feedback-message", "header__title", "keyboard", "theme-switch"
 ]
 
-// all the multiple elements classes needed to apply dark mode
+//* all the multiple elements classes needed to apply dark mode
+// elements that needs one hyphen (-dark) to apply dark mode 
 const singleHyphenElements = [
   "game-board__letter--missing", "game-board__letter--close",
   "game-board__letter--correct", "keyboard__letter--missing",
   "keyboard__letter--close", "keyboard__letter--correct", "fake-letter--missing",
   "fake-letter--close", "fake-letter--correct"
 ];
-
+// elements that needs two hyphen (--dark) to apply dark mode 
 const doubleHyphenElements = [
   "game-board__letter", "keyboard__letter", "row-separator", "fake-letter",
   "subheader-text", "how-to-play__headings", "how-to-play__list", "loading-container",
   "loading-spinner", "source-notice"
 ];
 
-
-const multipleElementsClasses = [singleHyphenElements, doubleHyphenElements]
+const multipleElementsClasses = [singleHyphenElements, doubleHyphenElements];
 
 // light and dark theme SVG elements
 const lightThemeSVGs = document.body.querySelectorAll(".light-theme__svg");
 const darkThemeSVGs = document.body.querySelectorAll(".dark-theme__svg");
 
-//************************************* */
+//**********************************
+//* General dialog Functions
+//**********************************/
 
-/*********************************
-  ** General dialogs Functions
-*********************************/
 function openDialog(dialogName) {
   if (dialogName === "settings") {
     // add dialog entry animation
@@ -132,9 +130,9 @@ function handleOutsideDialogClick(dialogName) {
 
   return outsideDialogAreaEvent;
 }
-/*********************************
-  ** Settings dialog Functions
-*********************************/
+//**********************************
+//* Settings dialog Functions
+//**********************************/
 
 function handleSettingsButton() {
   const settingsBtn = document.querySelector(".settings-btn");
@@ -152,13 +150,13 @@ function closeSettingsEvent() {
   closeDialog("settings");
 }
 
-/****************************
-  ** Dark mode Functions
-****************************/
+//**********************************
+//* Dark mode Functions
+//**********************************/
 
-/*********************
-  * Main Functions
-**********************/
+//*********************
+//* Main Functions
+//*********************/
 
 //* initial check function to know if a switch to dark theme is needed based on user preference
 function initialDarkModeCheck() {
@@ -178,9 +176,9 @@ function handleThemeButton() {
 }
 
 
-/*********************
-  * helper Functions
-**********************/
+//*********************
+//* Helper Functions
+//*********************/
 
 //* main event handler for the dark mode button
 function handleThemeChange() {
@@ -386,12 +384,12 @@ function getElement(elementName) {
   return document.body.querySelector(`.${elementName}`);
 }
 
-// Function that takes a class name and returns all associated elements from the DOM
+//* Function that takes a class name and returns all associated elements from the DOM
 function getElements(elementsName) {
   return document.body.querySelectorAll(`.${elementsName}`);
 }
 
-// Function that handles SVG elements and changes them based on the current theme
+//* Function that handles SVG elements and changes them based on the current theme
 function svgChanger(lightSVGs, darkSVGs, theme) {
   if (theme === "light") {
     lightSVGs.forEach(svg => {
@@ -410,9 +408,9 @@ function svgChanger(lightSVGs, darkSVGs, theme) {
   }
 }
 
-/***********************************
-  ** how to play dialog Functions
-***********************************/
+//**********************************
+//* how to play dialog Functions
+//**********************************/
 
 function handleHowToPlayButton() {
   const howToPlayBtn = document.body.querySelector(".how-to-play-btn");

@@ -181,10 +181,12 @@ async function handleValidation(wordOfTheDay, userInput) {
 }
 
 /*
-  * This function compares both words (word of the day - user input) for similarity
-  * returns false and displays feedback => if user input is an invalid english word
-  * returns false => if the isWord function returns undefined
-  * returns false => if the words are not equal in length or the word of the day has any invalid characters
+  * This function compares both words (word of the day , user input) for similarity
+  * returns false and displays feedback => if user input is an invalid word
+  * returns false only => 
+    ** if the isWord function returns undefined 
+    ** if the words are not equal in length or the word of the day has any invalid characters
+  
   * returns a mixed array of booleans and strings => in case of a valid check
   * with the three values:
     ** true => for characters available in both words at the same position
@@ -203,7 +205,7 @@ async function compareWords(wordOfTheDay, userInput) {
     return false;
   }
 
-  // validate input
+  // check words lengths
   if (/\d/.test(wordOfTheDay) || (wordOfTheDay.length !== userInput.length)) {
     feedbackMessage("Server Error, Enjoy a cookie while we work on it 😙", true);
     return false;
@@ -211,17 +213,17 @@ async function compareWords(wordOfTheDay, userInput) {
 
   // initial similarity between user input and word of the day
   let similarLetters = Array.from(userInput, () => false);
+
   // unify input
   wordOfTheDay = wordOfTheDay.toLowerCase();
   userInput = userInput.toLowerCase();
 
   // check for similarity between letters
   for (let i = 0; i < wordOfTheDay.length; i++) {
-    
-    // find indices of all the letters in userInput that's equal to current
+    // find indices of letters in userInput that are the same as current word of the day letter
     let foundIndices = findLetterIndices(userInput, wordOfTheDay[i]);
 
-    // if one occurrence only in userInput
+    // if word of the day letter is found only once in user input
     if (foundIndices.length === 1) {
       handleSingleOccurrence(foundIndices[0], i, similarLetters);
     } else {
@@ -236,23 +238,23 @@ async function compareWords(wordOfTheDay, userInput) {
   * This function returns an array of all found indices for the second argument (letter)
   * inside of the first argument (word)
 */
-function findLetterIndices(userInput, wordOfTheDayLetter) {
+function findLetterIndices(userInputWord, wordOfTheDayLetter) {
   // initial array to track all found indices
   let foundIndices = [];
-  // check for first occurrence of each user word letter in the word of the day
-  let currentFound = userInput.indexOf(wordOfTheDayLetter);
+  // check for first occurrence of word of the day letter in the user input
+  let currentFound = userInputWord.indexOf(wordOfTheDayLetter);
 
   // check for any subsequent occurrences
   while (currentFound !== -1) {
+    // push the first found occurrence
     foundIndices.push(currentFound);
-    currentFound = userInput.indexOf(wordOfTheDayLetter, currentFound + 1);
+    // look for further indices following the last occurrence
+    currentFound = userInputWord.indexOf(wordOfTheDayLetter, currentFound + 1);
   }
   return foundIndices;
 }
 
-/*
-  * This function handles single letter occurrence in wordOfTheDay
-*/
+//* This function handles single letter occurrence in wordOfTheDay
 function handleSingleOccurrence(foundIndex, currentIndex, similarLetters) {
   if (foundIndex === currentIndex) {
     similarLetters[foundIndex] = true;
@@ -261,38 +263,43 @@ function handleSingleOccurrence(foundIndex, currentIndex, similarLetters) {
   }
 }
 
-/*
-  * This function handles multiple letter occurrences in wordOfTheDay
-*/
-function handleMultipleOccurrences(foundIndices, currentIndex, similarLetters) {
-  // initial differences between userInput Indices and current word letter map
-  let indexDifferences = new Map();
+//* This function handles multiple letter occurrences in wordOfTheDay
+function handleMultipleOccurrences(foundIndices, todayWordLetterIndex, similarLetters) {
+  /*
+    * initial differences between userInput Indices and current word of the day letter
+      ** for example: if found index is 1 and word of the day letter index is 4 => difference is 3
+      ** map key => found index
+      ** map key value => indices difference
+  */
+  let indicesDifferences = new Map();
 
-  // get differences
-  foundIndices.forEach(index => {
-    const currentIndexDifference = Math.abs(index - currentIndex);
-    indexDifferences.set(`${index}`, currentIndexDifference);
+  // get Indices differences
+  foundIndices.forEach(foundIndex => {
+    const foundIndexDifference = Math.abs(foundIndex - todayWordLetterIndex);
+    indicesDifferences.set(`${foundIndex}`, foundIndexDifference);
   })
 
-  let closestIndex = findClosestIndex(indexDifferences);
+  // find closest found index to word of the day letter
+  let closestIndex = findClosestIndex(indicesDifferences);
 
   // remove entry (to avoid including in future searches)
-  indexDifferences.delete(closestIndex);
+  indicesDifferences.delete(closestIndex);
 
-  if (Number(closestIndex) === currentIndex) {
+  if (Number(closestIndex) === todayWordLetterIndex) {
     similarLetters[closestIndex] = true;
   } else {
+    // if hasn't been processed yet
     if (similarLetters[closestIndex] === false) {
+      // mark as close
       similarLetters[closestIndex] = "close";
     } else {
-      handleRemainingDifferences(indexDifferences, similarLetters);
+      // look for the next closest index that hasn't been processed
+      handleRemainingDifferences(indicesDifferences, similarLetters);
     }
   }
 }
 
-/*
-  * This function return the first index with the lowest difference
-*/
+//* This function return the first index with the lowest difference
 function findClosestIndex(differencesMap) {
   // Get closest Index based on smallest difference
   let minEntry = [...differencesMap.entries()].reduce((arr, [index, diff]) => {
@@ -312,7 +319,7 @@ function handleRemainingDifferences(differencesMap, similarLetters) {
     let closestIndex = findClosestIndex(differencesMap);
     differencesMap.delete(closestIndex);
 
-    // if found an unprocessed index handle and break out of loop
+    // if an unprocessed index is found, handle and break out of loop
     if (similarLetters[closestIndex] === false) {
       similarLetters[closestIndex] = "close";
       break;
@@ -322,9 +329,9 @@ function handleRemainingDifferences(differencesMap, similarLetters) {
 
 /*
   * This function check if the user input is a valid word
-  * returns undefined => if there is no internet or on API server errors
-  * returns true => in case of a valid word
-  * returns false => in case of an invalid word
+    ** returns true => in case of a valid word
+    ** returns false => in case of an invalid word
+    ** returns undefined => if there is no internet or on API server errors
 */
 async function isWord(word) {
   // Post to validation API
