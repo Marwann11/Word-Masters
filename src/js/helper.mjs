@@ -1,7 +1,7 @@
 import { handleInput } from './modules/input.mjs';
 import { cellAnimation, keyboardAnimation, removeKeyboardAnimations } from './modules/animations.mjs';
 import { completeValidationCheck } from './modules/validation.mjs';
-import { handleSettingsButton, handleThemeButton, handleHowToPlayButton } from './modules/buttons.mjs';
+import { handleSettingsButton, handleThemeButton, handleHowToPlayButton } from './modules/dialogs.mjs';
 import { userProgress } from './modules/userProgress.mjs';
 import { getTodayWord } from './modules/wordOfTheDay.mjs';
 

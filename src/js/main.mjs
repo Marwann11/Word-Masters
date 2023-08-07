@@ -1,6 +1,6 @@
 import { isDayPassed, setNewDate, removeYesterdayDate } from './modules/wordOfTheDay.mjs';
 import { previousGameState, applyPreviousGameState } from "./modules/userProgress.mjs";
-import { initialDarkModeCheck } from "./modules/buttons.mjs";
+import { initialDarkModeCheck } from "./modules/dialogs.mjs";
 import { addFunctionality, handleButtonsEvents } from "./helper.mjs";
 
 

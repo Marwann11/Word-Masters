@@ -1,5 +1,5 @@
 import { feedbackMessage } from "./validation.mjs";
-import { openHowToPlayDialog } from './buttons.mjs';
+import { openHowToPlayDialog } from './dialogs.mjs';
 
 
 //********************* */
