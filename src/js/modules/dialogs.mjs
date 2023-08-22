@@ -1,5 +1,6 @@
 import { addFunctionality, removeFunctionality } from "../helper.mjs"
 import { fakeValidationAnimation, dialogsEntryAnimation, dialogsExitAnimation } from "./animations.mjs"
+import { previousGameState } from "../modules/userProgress.mjs"
 
 
 //********************* */
@@ -58,12 +59,14 @@ function openDialog(dialogName) {
     howToPlayDialog.focus();
   }
 
-  // remove user input event listeners to prevent interaction
-  removeFunctionality();
-
   // add an event listener on page for the ESC key and outside the modal box clicks
   document.addEventListener("keydown", handleEscKeyClick(dialogName));
   document.addEventListener("click", handleOutsideDialogClick(dialogName));
+
+  if (!previousGameState.isSolved) {
+    // remove user input event listeners to prevent interaction
+    removeFunctionality();
+  }
 }
 
 function closeDialog(dialogName) {
@@ -88,12 +91,15 @@ function closeDialog(dialogName) {
     }, 450);
 
   }
+
   // remove both dialog related event listeners
   document.removeEventListener("keydown", EscKeyDialogEvent);
   document.removeEventListener("click", outsideDialogAreaEvent);
 
-  // add user input event listeners to regain interactivity
-  addFunctionality();
+  if (!previousGameState.isSolved) {
+    // add user input event listeners to regain interactivity
+    addFunctionality();
+  }
 }
 
 /*
@@ -465,4 +471,4 @@ function fakeRowObserver(fakeWordRow, fakeWordCells) {
 export {
   handleSettingsButton, handleThemeButton, handleHowToPlayButton,
   initialDarkModeCheck, openHowToPlayDialog
-};
+}
